@@ -1,0 +1,34 @@
+{
+  "name": "CV_WEB_BACK",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon npm src/index.js",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SebastianEPH/CV_WEB_BACK.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SebastianEPH/CV_WEB_BACK/issues"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "nodemon": "^2.0.15"
+  },
+  "homepage": "https://github.com/SebastianEPH/CV_WEB_BACK#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "cors": "^2.8.5",
+    "helmet": "^5.0.2",
+    "mysql": "^2.18.1",
+    "notenv": "^2.0.3",
+    "morgan": "^1.10.0"
+  }
+}
