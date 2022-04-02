@@ -17,6 +17,9 @@ person.getProject = async(req, res)=>{
         SELECT
         project.id,
         project.name,
+        project.img,
+        project.date_init,
+        project.date_finish,
         project.web_deploy,
         project.description,
         project.repository,
@@ -25,44 +28,39 @@ person.getProject = async(req, res)=>{
         LEFT JOIN project_type ON project.type_id = project_type.id
         
         `)
-        // project.hola = await "hola pex "
-        // project.map( async function(p, index){
-        //         const letters = await pool.query(`
-        //                 SELECT
-        //                    programming_tools.tools
-        //                 FROM project_tools
-        //                 JOIN programming_tools ON project_tools.tools = programming_tools.id
-        //                 WHERE project_id = ${p.id}
-        //         `)
-        //         project.tools = await  letters
-        //         console.log(p.id)
-        //         console.log(letters,"esto es reo ")
-        //         console.log("luego de la union", project)
-        //         console.log("luego de la union con tools", project)
-        // })
+
         for (let i = 0; i < project.length; i++) {
             let tools  = [];
             let language  = [];
             const pTools = await pool.query(`
                 SELECT
-                   programming_tools.tools
+                    programming_tools.tools,
+                    programming_tools.icon
                 FROM project_tools
                 JOIN programming_tools ON project_tools.tools = programming_tools.id
                 WHERE project_id = ${project[i].id}
             `)
             const pLanguage = await pool.query(`
                 SELECT
-                   programming_language.language
+                   programming_language.language,
+                   programming_language.icon
                 FROM project_language
                 JOIN programming_language ON project_language.language = programming_language.id
                 WHERE project_id = ${project[i].id}
-            `)
-            pTools.map(data=> tools.push(data.tools));
-            pLanguage.map(data=> language.push(data.language))
+            `)//   programming_language.lcon
+            pTools.map(data=> tools.push({
+                tools: data.tools, 
+                icon: data.icon
+            }));
+            pLanguage.map(data=> language.push({
+                language:data.language, 
+                icon:data.icon
+            }))
             project[i].tools = tools;
             project[i].language = language;
 
-
+            //programming_tools.tools
+            console.log("Esto es lo la consulta tools  ",pTools)
 
             console.log(i, "<= solo i ")
             console.log(project[i], "<= es el objeto nuevo ")

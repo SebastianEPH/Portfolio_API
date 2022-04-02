@@ -7,6 +7,7 @@ const {database} = require('../database/key')
 // const auth = require('../routes/auth')
 const data = require('../routes/data')
 // const passport = require('passport')
+const cors = require('cors')
 
 module.exports = (app) => {
 
@@ -28,6 +29,7 @@ module.exports = (app) => {
     // app.use(passport.session());
     //
 
+    app.use(cors())
 
     app.use(morgan('dev'));
     app.use(express.urlencoded({

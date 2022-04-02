@@ -6,8 +6,8 @@ const person = require("../controller/controller_person")
 // const {verifyToken} = require ("../middleware/index")
 
 // data
-routes.get('/person', person.getAll)
-routes.get('/person/project', person.getProject)
+routes.get('/my', person.getAll)
+routes.get('/my/project', person.getProject)
 
 // routes.post('/myuser', accessToken.verifyToken, (req, res)=>{
 
