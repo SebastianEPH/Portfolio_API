@@ -43,20 +43,26 @@ project.AddFeature = async(req, res)=>{
     }
 }
 
-project.DeleteFeature= async(req, res)=>{
-    const {project_id} = req.params
+project.deleteFeature = async(req, res)=>{
+    const {project_id, feature_id} = req.params
     //parse IDs from params
-    const parseIds = parse.IdForDB([project_id])
+    const parseIds = parse.IdForDB([project_id, feature_id])
     if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
-
-    const response = await pool.query(`
-            INSERT INTO
-                feature, description, img
-            FROM project_feature
-            WHERE project_id = ?
-        `,[project_id])
-    res.json({message: " si se copio pex delete "})
+    try{ // try connection
+        console.log("las params son", project_id, feature_id)
+        const query = await pool.query(`
+            DELETE FROM project_feature
+            WHERE project_id = ? 
+            AND 
+            id = ?
+        `,[project_id,feature_id])
+        console.log("delete ",query)
+        const response =  DB.responseDel(query)
+        return res.status(response.status).json({message:response.message})
+    }catch (E){
+        return res.status(400).json({message:"Hubo un error al procesar los datos"})
+    }
 }
 
 
@@ -99,6 +105,7 @@ project.getProjectOnly = async(req, res)=>{
     let screenshot = [];
     const pTools = await pool.query(`
             SELECT
+                programming_tools.id,
                 programming_tools.tools,
                 programming_tools.icon
             FROM project_tools
@@ -113,6 +120,7 @@ project.getProjectOnly = async(req, res)=>{
 
     const pLanguage = await pool.query(`
             SELECT
+               programming_language.id,
                programming_language.language,
                programming_language.icon
             FROM project_language
@@ -136,19 +144,24 @@ project.getProjectOnly = async(req, res)=>{
     console.log("screenshot pessss *-*****************************", screenshot)
 
     pScreenshot.map(data=> screenshot.push({
+        id: data.id,
         screenshot: data.screenshot,
         details: data.details,
         number: data.number
     }));
     pFeatures.map(data=> features.push({
+        id: data.id,
         feature: data.feature,
-        description: data.description
+        description: data.description,
+        img: data.img
     }));
     pTools.map(data=> tools.push({
+        id: data.id,
         tools: data.tools,
         icon: data.icon
     }));
     pLanguage.map(data=> language.push({
+        id:data.id,
         language:data.language,
         icon:data.icon
     }))

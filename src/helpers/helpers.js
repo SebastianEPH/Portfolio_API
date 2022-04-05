@@ -93,18 +93,18 @@ helpers.DB.responseDBGet =(response)=>{
 responseDBType = (response,nameType)=>{
     const type={
         add:{
-            successfully:"Was Added successfully",
-            permissions:"You do not have the necessary permissions for added",
+            successfully:"Se agregó correctamente",
+            permissions:"No tienes los permisos necesarios para agregar",
             noUpdate:"no changed to update",
         },
         upd:{
-            successfully:"Was update successfully",
-            permissions:"You do not have the necessary permissions for update",
+            successfully:"Se actualizó correctamente",
+            permissions:"No tienes los permisos necesarios para actualizar",
             noUpdate:"no changed to update",
         },
         del:{
-            successfully:"The item was remove successfully",
-            permissions:"You do not have the necessary permissions for remove",
+            successfully:"Se eliminó correctamente",
+            permissions:"No tienes los permisos necesarios para eliminar",
         }
     }
     console.log("esto nes el res completo",response)
