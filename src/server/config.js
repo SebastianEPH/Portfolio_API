@@ -5,7 +5,6 @@ const {database} = require('../database/key')
 // const session = require('express-session')
 // const MysqlStore = require('express-mysql-session')
 // const auth = require('../routes/auth')
-const data = require('../routes/data')
 // const passport = require('passport')
 const cors = require('cors')
 
@@ -49,7 +48,8 @@ module.exports = (app) => {
 
 
     //Routers
-    app.use('/api/', data);
+    app.use('/api/', require('../routes/data'));
+    app.use('/api/', require('../routes/project'));
     // app.use('/api/auth/', auth);
     // app.use(routers_index);
     // app.use('/task',routers_index);

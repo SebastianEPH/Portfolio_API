@@ -8,7 +8,7 @@ const person = require("../controller/controller_person")
 // data
 routes.get('/my', person.getAll)
 routes.get('/my/project', person.getProject)
-routes.get('/my/project/:project_id', person.getProjectOnly)
+    // routes.get('/my/project/:project_id', person.getProjectOnly)
 
 // routes.post('/myuser', accessToken.verifyToken, (req, res)=>{
 
