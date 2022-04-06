@@ -94,17 +94,17 @@ responseDBType = (response,nameType)=>{
     const type={
         add:{
             successfully:"Se agregó correctamente",
-            permissions:"No tienes los permisos necesarios para agregar",
+            permissions:"No tienes los permisos necesarios para agregar o no existe el item",
             noUpdate:"no changed to update",
         },
         upd:{
             successfully:"Se actualizó correctamente",
-            permissions:"No tienes los permisos necesarios para actualizar",
+            permissions:"No tienes los permisos necesarios para actualizar o no existe el item",
             noUpdate:"no changed to update",
         },
         del:{
             successfully:"Se eliminó correctamente",
-            permissions:"No tienes los permisos necesarios para eliminar",
+            permissions:"No tienes los permisos necesarios para eliminar o no existe el item",
         }
     }
     console.log("esto nes el res completo",response)
