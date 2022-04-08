@@ -37,6 +37,7 @@ project.getProjectsAll = async(req, res)=>{
         let language  = [];
         const pTools = await pool.query(`
                 SELECT
+                    programming_tools.id as "sdfs",
                     programming_tools.tools,
                     programming_tools.icon
                 FROM project_tools
@@ -156,13 +157,13 @@ project.getProjectOnly = async(req, res)=>{
         WHERE project.id = ? 
         `,[project_id])
 
-    let tools  = [];
-    let language  = [];
-    let features = [];
-    let screenshot = [];
+    // let tools  = [];
+    // let language  = [];
+    // let features = [];
+    // let screenshot = [];
     const pTools = await pool.query(`
             SELECT
-                programming_tools.id,
+                project_tools.id ,
                 programming_tools.tools,
                 programming_tools.icon
             FROM project_tools
@@ -177,7 +178,7 @@ project.getProjectOnly = async(req, res)=>{
 
     const pLanguage = await pool.query(`
             SELECT
-               programming_language.id,
+               project_language.id,
                programming_language.language,
                programming_language.icon
             FROM project_language
@@ -199,35 +200,35 @@ project.getProjectOnly = async(req, res)=>{
             ORDER BY number ASC;
     
         `,[project_id])
-    console.log("screenshot pessss *-*****************************", screenshot)
-
-    pScreenshot.map(data=> screenshot.push({
-        id: data.id,
-        screenshot: data.screenshot,
-        details: data.details,
-        number: data.number
-    }));
-    pFeatures.map(data=> features.push({
-        id: data.id,
-        feature: data.feature,
-        description: data.description,
-        img: data.img
-    }));
-    pTools.map(data=> tools.push({
-        id: data.id,
-        tools: data.tools,
-        icon: data.icon
-    }));
-    pLanguage.map(data=> language.push({
-        id:data.id,
-        language:data.language,
-        icon:data.icon
-    }))
+    // console.log("screenshot pessss *-*****************************", screenshot)
+    //
+    // pScreenshot.map(data=> screenshot.push({
+    //     id: data.id,
+    //     screenshot: data.screenshot,
+    //     details: data.details,
+    //     number: data.number
+    // }));
+    // pFeatures.map(data=> features.push({
+    //     id: data.id,
+    //     feature: data.feature,
+    //     description: data.description,
+    //     img: data.img
+    // }));
+    // pTools.map(data=> tools.push({
+    //     id: data.id,
+    //     tools: data.tools,
+    //     icon: data.icon
+    // }));
+    // pLanguage.map(data=> language.push({
+    //     id:data.id,
+    //     language:data.language,
+    //     icon:data.icon
+    // }))
     project[0].person = pPerson[0];
-    project[0].tools = tools;
-    project[0].feature = features;
-    project[0].screenshot = screenshot;
-    project[0].language = language;
+    project[0].tools = pTools //tools;
+    project[0].feature = pFeatures;
+    project[0].screenshot = pScreenshot;
+    project[0].language = pLanguage//language;
 
     res.json(project[0])
 
@@ -470,6 +471,7 @@ project.addTools = async(req, res)=>{
 
 project.deleteTools = async(req, res)=>{
     const {project_id,  tools_id} = req.params
+    console.log("estos son los paremetros", req.params)
     //parse IDs from params
     const parseIds = parse.IdForDB([project_id, tools_id])
     if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}

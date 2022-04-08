@@ -2,7 +2,6 @@ const {parse} = require("../helpers/helpers")
 data = {}
 const pool = require('../database/database')
 
-const person_id = 1
 data.getAll = async(req, res)=>{
     let myData = {}
     const person = await pool.query(`
