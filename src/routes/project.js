@@ -21,6 +21,7 @@ routes.post('/my/project/:project_id/language', project.addLanguage)
 routes.delete('/my/project/:project_id/language/:language_id', project.deleteLanguage)
 
 // Tools
+routes.post('/my/project/:project_id/tools', project.addTools)
 routes.delete('/my/project/:project_id/tools/:tools_id', project.deleteTools)
 
 
