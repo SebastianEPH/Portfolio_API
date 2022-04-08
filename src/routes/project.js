@@ -6,6 +6,7 @@ const project = require("../controller/controller_project")
 routes.get('/my/project/:project_id', project.getProjectOnly)
 
 // Feature
+routes.get('/my/projects', project.getProjectsAll)
 routes.post('/my/project/:project_id/feature', project.AddFeature)
 routes.put('/my/project/:project_id/feature', project.updateFeature)
 routes.delete('/my/project/:project_id/feature/:feature_id', project.deleteFeature)
