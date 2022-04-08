@@ -16,6 +16,13 @@ routes.post('/my/project/:project_id/screenshot', project.AddScreenshot)
 routes.put('/my/project/:project_id/screenshot', project.updateScreenshot)
 routes.delete('/my/project/:project_id/screenshot/:screenshot_id', project.deleteScreenshot)
 
+// Language
+routes.post('/my/project/:project_id/language', project.addLanguage)
+routes.delete('/my/project/:project_id/language/:language_id', project.deleteLanguage)
+
+// Tools
+routes.delete('/my/project/:project_id/tools/:tools_id', project.deleteTools)
+
 
 
 module.exports = routes;
