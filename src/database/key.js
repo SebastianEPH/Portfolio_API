@@ -1,9 +1,11 @@
+const env = require("dotenv")
+
+env.config()
 module.exports = {
     database: {
-        host: "localhost",
-        user: "root",
-        password: "87654321",
-        database: "cv_web",
-        port: "3306"
+        host: process.env.DB_SQL_HOST,
+        user: process.env.DB_SQL_USER,
+        password: process.env.DB_SQL_PASSWORD,
+        database: process.env.DB_SQL_DATABASE
     }
 }

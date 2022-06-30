@@ -6,6 +6,7 @@ const {database} = require('../database/key')
 // const MysqlStore = require('express-mysql-session')
 // const auth = require('../routes/auth')
 // const passport = require('passport')
+const env = require("dotenv")
 const cors = require('cors')
 
 module.exports = (app) => {
@@ -16,6 +17,8 @@ module.exports = (app) => {
     app.use(express.urlencoded({
         extended: false  // Los datos que se enviarán son muy sencillas
     }));
+
+    env.config()
 
     // Meddlewares
     // app.use(session({
@@ -45,11 +48,11 @@ module.exports = (app) => {
     // });
 
 
-
-
     //Routers
-    app.use('/api/', require('../routes/data'));
-    app.use('/api/', require('../routes/project'));
+    const baseApi = `/api/${process.env.VERSION_API}`;
+
+    app.use(baseApi , require('../routes/data'));
+    app.use(baseApi, require('../routes/project'));
     // app.use('/api/auth/', auth);
     // app.use(routers_index);
     // app.use('/task',routers_index);
