@@ -12,20 +12,19 @@ project.getAllProjects = async(req, res)=>{
         const programming_tools = await pool.query(`call sp_getProjects_programmingTools(${projects[i].id});`)
         projects[i].tools = programming_tools[0];
 
-        const programming_language = await pool.query(`call sp_getProjects_programmingLanguage(${projects[i].id});`)
-        projects[i].languages = programming_language[0];
+        const languages = await pool.query(`call sp_getProjects_languages;(${projects[i].id});`)
+        projects[i].languages = languages[0];
 
         const projects_features = await pool.query(`call sp_getProjects_features(${projects[i].id});`)
         projects[i].features = projects_features[0];
 
-        const projects_screenshot= await pool.query(`call sp_getProjects_screenshot(${projects[i].id});`)
+        const projects_screenshot= await pool.query(`call sp_getProjects_screenshots(${projects[i].id});`)
         projects[i].screenshots = projects_screenshot[0];
 
     }
     return res.json(projects)
 }
 project.getOnlyProject = async(req, res)=>{
-    console.log("only")
     const {project_id} = req.params
     //parse IDs from params
     const parseIds = parse.IdForDB([project_id])
@@ -37,13 +36,13 @@ project.getOnlyProject = async(req, res)=>{
     const programming_tools = await pool.query(`call sp_getProjects_programmingTools(${project_id});`)
     project.tools = programming_tools[0];
 
-    const programming_language = await pool.query(`call sp_getProjects_programmingLanguage(${project_id});`)
-    project.languages = programming_language[0];
+    const languages = await pool.query(`call sp_getProjects_languages;(${project_id});`)
+    project.languages = languages[0];
 
     const project_features = await pool.query(`call sp_getProjects_features(${project_id});`)
     project.features = project_features[0];
 
-    const project_screenshot= await pool.query(`call sp_getProjects_screenshot(${project_id});`)
+    const project_screenshot= await pool.query(`call sp_getProjects_screenshots(${project_id});`)
     project.screenshots = project_screenshot[0];
 
     res.json(project)
@@ -71,10 +70,8 @@ project.getFeatures= async(req, res)=>{
     const parseIds = parse.IdForDB([project_id])
     if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
-    let responseFeatures = await pool.query(`call sp_getProjects_features(${project_id});`)
-    let projects_features = responseFeatures[0];
-
-    res.json(projects_features)
+    const projectsFeatures = await pool.query(`call sp_getProjects_features(${project_id});`)
+    res.json(projectsFeatures[0])
 }
 project.addFeatures= async(req, res)=>{
     const {project_id} = req.params
@@ -153,9 +150,17 @@ project.deleteFeature = async(req, res)=>{
         return res.status(400).json({message:"Hubo un error al procesar los datos"})
     }
 }
+project.getScreenshots= async(req, res)=>{
+    const {project_id} = req.params
+    //parse IDs from params
+    const parseIds = parse.IdForDB([project_id])
+    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
+    const projectsScreenshots = await pool.query(`call sp_getProjects_screenshots(${project_id});`)
+    res.json(projectsScreenshots[0])
+}
 
-project.AddScreenshot = async(req, res)=>{
+project.addScreenshots = async(req, res)=>{
     const {project_id} = req.params
     //parse IDs from params
     const parseIds = parse.IdForDB([project_id])
@@ -182,7 +187,7 @@ project.AddScreenshot = async(req, res)=>{
     }
 }
 
-project.updateScreenshot = async(req, res)=>{
+project.updateScreenshots = async(req, res)=>{
     const {project_id} = req.params
     //parse IDs from params
     const parseIds = parse.IdForDB([project_id, req.body.id])
@@ -212,7 +217,7 @@ project.updateScreenshot = async(req, res)=>{
 
 }
 
-project.deleteScreenshot = async(req, res)=>{
+project.deleteScreenshots = async(req, res)=>{
     const {project_id, screenshot_id} = req.params
     //parse IDs from params
     const parseIds = parse.IdForDB([project_id, screenshot_id])
@@ -234,7 +239,17 @@ project.deleteScreenshot = async(req, res)=>{
     }
 }
 
-project.deleteLanguage = async(req, res)=>{
+project.getLanguages = async(req, res)=>{
+    const {project_id} = req.params
+    //parse IDs from params
+    const parseIds = parse.IdForDB([project_id])
+    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
+
+    const projectsLanguage = await pool.query(`call sp_getProjects_languages(${project_id});`)
+    res.json(projectsLanguage[0])
+}
+
+project.deleteLanguages = async(req, res)=>{
     const {project_id, language_id} = req.params
     //parse IDs from params
     const parseIds = parse.IdForDB([project_id, language_id])
@@ -255,7 +270,7 @@ project.deleteLanguage = async(req, res)=>{
         return res.status(400).json({message:"Hubo un error al procesar los datos"})
     }
 }
-project.addLanguage = async(req, res)=>{
+project.addLanguages = async(req, res)=>{
     const {project_id} = req.params
     //parse IDs from params
     const parseIds = parse.IdForDB([project_id, req.body.language])
