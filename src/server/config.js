@@ -52,6 +52,8 @@ module.exports = (app) => {
     const baseApi = `/api/${process.env.VERSION_API}`;
 
     app.use(baseApi , require('../routes/data'));
+
+    app.use(baseApi, require('../routes/projects/projects')); // only projects
     app.use(baseApi, require('../routes/project'));
     // app.use('/api/auth/', auth);
     // app.use(routers_index);

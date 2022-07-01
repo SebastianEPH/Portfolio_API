@@ -5,10 +5,10 @@ const project = require("../controller/controller_project")
 
 
 // data
-routes.get('/projects/:project_id', project.getProjectOnly)
+// routes.get('/projects/:project_id', project.getProjectOnly)
 
 // Feature
-routes.get('/projects', project.getProjectsAll)
+// routes.get('/projects', project.getProjectsAll)
 routes.post('/projects/:project_id/feature', project.AddFeature)
 routes.put('/projects/:project_id/feature', project.updateFeature)
 routes.delete('/projects/:project_id/feature/:feature_id', project.deleteFeature)
