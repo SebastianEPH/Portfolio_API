@@ -1,6 +1,9 @@
 const express  =  require('express');
 const routes = express.Router();
 const project = require("../../controller/controller_project");
+const verify = require("../../midlewares/valide");
+
+routes.use(verify.checkProjectsID)
 
 routes.get('/projects/:project_id/screenshots', project.getScreenshots)
 routes.post('/projects/:project_id/screenshots', project.addScreenshots)

@@ -9,10 +9,10 @@ project.getAllProjects = async(req, res)=>{
     const projects = responseProjects[0]
 
     for (let i = 0; i < projects.length; i++) {
-        const programming_tools = await pool.query(`call sp_getProjects_programmingTools(${projects[i].id});`)
-        projects[i].tools = programming_tools[0];
+        const tools = await pool.query(`call sp_getProjects_tools(${projects[i].id});`)
+        projects[i].tools = tools[0];
 
-        const languages = await pool.query(`call sp_getProjects_languages;(${projects[i].id});`)
+        const languages = await pool.query(`call sp_getProjects_languages(${projects[i].id});`)
         projects[i].languages = languages[0];
 
         const projects_features = await pool.query(`call sp_getProjects_features(${projects[i].id});`)
@@ -26,15 +26,12 @@ project.getAllProjects = async(req, res)=>{
 }
 project.getOnlyProject = async(req, res)=>{
     const {project_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     let responseProject = await pool.query(`call sp_getProjects(${project_id});`)
     let project = responseProject[0][0];
 
-    const programming_tools = await pool.query(`call sp_getProjects_programmingTools(${project_id});`)
-    project.tools = programming_tools[0];
+    const tools = await pool.query(`call sp_getProjects_tools(${project_id});`)
+    project.tools = tools[0];
 
     const languages = await pool.query(`call sp_getProjects_languages;(${project_id});`)
     project.languages = languages[0];
@@ -55,9 +52,6 @@ project.getAllProjectsShort = async(req, res)=>{
 }
 project.getOnlyProjectShort = async(req, res)=>{
     const {project_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     let responseProject = await pool.query(`call sp_getProjects(${project_id});`)
     let project = responseProject[0][0];
@@ -66,18 +60,12 @@ project.getOnlyProjectShort = async(req, res)=>{
 }
 project.getFeatures= async(req, res)=>{
     const {project_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     const projectsFeatures = await pool.query(`call sp_getProjects_features(${project_id});`)
     res.json(projectsFeatures[0])
 }
 project.addFeatures= async(req, res)=>{
     const {project_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     // chack if the object data matches
     const parseBody= parse.ObjDB({...req.body,  project_id},["feature", "description", "img"], [], ["project_id"])
@@ -101,9 +89,6 @@ project.addFeatures= async(req, res)=>{
 
 project.updateFeatures = async(req, res)=>{
     const {project_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id, req.body.id])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     // chack if the object data matches
     const parseBody= parse.ObjDB({...req.body},["feature", "description", "img"], [], [])
@@ -131,9 +116,6 @@ project.updateFeatures = async(req, res)=>{
 
 project.deleteFeature = async(req, res)=>{
     const {project_id, feature_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id, feature_id])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     try{ // try connection
         console.log("las params son", project_id, feature_id)
@@ -152,9 +134,6 @@ project.deleteFeature = async(req, res)=>{
 }
 project.getScreenshots= async(req, res)=>{
     const {project_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     const projectsScreenshots = await pool.query(`call sp_getProjects_screenshots(${project_id});`)
     res.json(projectsScreenshots[0])
@@ -162,9 +141,6 @@ project.getScreenshots= async(req, res)=>{
 
 project.addScreenshots = async(req, res)=>{
     const {project_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     // chack if the object data matches
     const parseBody= parse.ObjDB({...req.body,  project_id},["screenshot", "details", "number"], [], ["project_id"])
@@ -189,9 +165,6 @@ project.addScreenshots = async(req, res)=>{
 
 project.updateScreenshots = async(req, res)=>{
     const {project_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id, req.body.id])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     // chack if the object data matches
     const parseBody= parse.ObjDB(req.body,["screenshot", "details", "number"], [], ["id"])
@@ -219,9 +192,6 @@ project.updateScreenshots = async(req, res)=>{
 
 project.deleteScreenshots = async(req, res)=>{
     const {project_id, screenshot_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id, screenshot_id])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     try{ // try connection
         console.log("las params son", project_id, screenshot_id)
@@ -241,9 +211,6 @@ project.deleteScreenshots = async(req, res)=>{
 
 project.getLanguages = async(req, res)=>{
     const {project_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     const projectsLanguage = await pool.query(`call sp_getProjects_languages(${project_id});`)
     res.json(projectsLanguage[0])
@@ -251,9 +218,6 @@ project.getLanguages = async(req, res)=>{
 
 project.deleteLanguages = async(req, res)=>{
     const {project_id, language_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id, language_id])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     try{ // try connection
         console.log("las params son", project_id, language_id)
@@ -272,9 +236,6 @@ project.deleteLanguages = async(req, res)=>{
 }
 project.addLanguages = async(req, res)=>{
     const {project_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id, req.body.language])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     // chack if the object data matches
     const parseBody= parse.ObjDB({...req.body,  project_id},[], [], ["project_id", "language"])
@@ -296,12 +257,14 @@ project.addLanguages = async(req, res)=>{
         return res.status(400).json({message:"The submitted data cannot be processed"})
     }
 }
+project.getTools = async(req, res)=>{
+    const {project_id} = req.params
 
+    const projectsTools = await pool.query(`call sp_getProjects_tools(${project_id});`)
+    res.json(projectsTools[0])
+}
 project.addTools = async(req, res)=>{
     const {project_id} = req.params
-    //parse IDs from params
-    const parseIds = parse.IdForDB([project_id, req.body.tools])
-    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
     // chack if the object data matches
     const parseBody= parse.ObjDB({...req.body,  project_id},[], [], ["project_id", "tools"])
@@ -326,7 +289,6 @@ project.addTools = async(req, res)=>{
 
 project.deleteTools = async(req, res)=>{
     const {project_id,  tools_id} = req.params
-    console.log("estos son los paremetros", req.params)
     //parse IDs from params
     const parseIds = parse.IdForDB([project_id, tools_id])
     if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
@@ -346,10 +308,5 @@ project.deleteTools = async(req, res)=>{
         return res.status(400).json({message:"Hubo un error al procesar los datos"})
     }
 }
-
-
-
-
-
 
 module.exports = project;
