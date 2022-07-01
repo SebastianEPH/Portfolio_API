@@ -1,4 +1,3 @@
-const {parse} = require("../helpers/helpers")
 data = {}
 const pool = require('../database/database')
 

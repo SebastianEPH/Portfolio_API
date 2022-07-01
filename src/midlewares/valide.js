@@ -41,7 +41,6 @@ helpers.checkIDSQL = (req, res, next)=>{
     next()
 }
 helpers.checkProjectsID = (req, res, next)=>{
-    console.log("entroi a varificacion");
     function isIDSQL(id){
         if(!id){return false}
         if(id.length< 1 || id.length >8){
@@ -53,13 +52,13 @@ helpers.checkProjectsID = (req, res, next)=>{
 
         return !isNaN(id)
     }
-    if(!isIDSQL(req.params.project_id)){
+    if(!isIDSQL(req.params.projects_id)){
         return res.status(402).json({
             ok:false,
             errors: {
                 name:{
-                    msg:"El ID enviado no es valido",
-                    param:"param id",
+                    msg:"El parametro ID enviado no es válido",
+                    param:"projects_id",
                     location:"params"
                 }}
         })

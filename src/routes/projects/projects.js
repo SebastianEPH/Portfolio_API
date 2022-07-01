@@ -9,8 +9,8 @@ routes.get("/projects/short", projects.getAllProjectsShort)
 
 routes.use(verify.checkProjectsID)
 
-routes.get('/projects/:project_id', projects.getOnlyProject)
-routes.get('/projects/short/:project_id', projects.getOnlyProjectShort)
+routes.get('/projects/:projects_id', projects.getOnlyProject)
+routes.get('/projects/short/:projects_id', projects.getOnlyProjectShort)
 
 
 module.exports = routes;

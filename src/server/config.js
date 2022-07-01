@@ -36,11 +36,12 @@ module.exports = (app) => {
 
     app.use(baseApi , require('../routes/data'));
 
+    app.use(baseApi, require('../routes/projects/projects')); // only projects
     app.use(baseApi, require('../routes/projects/features'));
     app.use(baseApi, require('../routes/projects/tools'));
     app.use(baseApi, require('../routes/projects/languages'));
     app.use(baseApi, require('../routes/projects/screenshots'));
-    app.use(baseApi, require('../routes/projects/projects')); // only projects
+
 
     // Static files
     app.use('/public', express.static(path.join(__dirname, '../public')));
