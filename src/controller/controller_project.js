@@ -14,6 +14,7 @@ project.getProjectsAll = async(req, res)=>{
 
         const programming_language = await pool.query(`call sp_getProjects_programmingLanguage(${projects[i].id});`)
         projects[i].programming_language = programming_language[0];
+
     }
     return res.json(projects)
 }
@@ -23,106 +24,22 @@ project.getProjectOnly = async(req, res)=>{
     const parseIds = parse.IdForDB([project_id])
     if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
-    let project = await pool.query(`
-        SELECT
-        project.id,
-        project.name,
-        project.img,
-        project.date_init,
-        project.short_details,
-        project.date_finish,
-        project.web_deploy,
-        project.description,
-        project.repository,
-        project.documentation,
-        project_type.project_type as "type",
-        project.version,
-        project.architecture,
-        project.state,
-        project.size,
-        project.platform,
-        project.licence,
-        project.ide,
-        project_range.range,
-        project_range.id as "range_id"
-        FROM project
-        LEFT JOIN project_type ON project.type_id = project_type.id
-        LEFT JOIN project_range ON project.range = project_range.id
-        WHERE project.id = ? 
-        `,[project_id])
+    let responseProject = await pool.query(`call sp_getProjects(${project_id});`)
+    let project = responseProject[0][0];
 
+    const programming_tools = await pool.query(`call sp_getProjects_programmingTools(${project_id});`)
+    project.tools = programming_tools[0];
 
-    const pTools = await pool.query(`
-            SELECT
-                project_tools.id ,
-                programming_tools.tools,
-                programming_tools.icon
-            FROM project_tools
-            JOIN programming_tools ON project_tools.tools = programming_tools.id
-            WHERE project_id = ?
-        `,[project_id])
-    const pPerson = await pool.query(`
-            SELECT
-                *
-            FROM person
-        `)
+    const programming_language = await pool.query(`call sp_getProjects_programmingLanguage(${project_id});`)
+    project.languages = programming_language[0];
 
-    const pLanguage = await pool.query(`
-            SELECT
-               project_language.id,
-               programming_language.language,
-               programming_language.icon
-            FROM project_language
-            JOIN programming_language ON project_language.language = programming_language.id
-            WHERE project_id = ?
-        `,[project_id])//   programming_language.lcon
+    const project_features = await pool.query(`call sp_getProjects_features(${project_id});`)
+    project.features = project_features[0];
 
-    const pFeatures = await pool.query(`
-            SELECT
-               *
-            FROM project_feature
-            WHERE project_id = ?
-        `,[project_id])
-    const pScreenshot = await pool.query(`
-            SELECT
-               *
-            FROM project_screenshot
-            WHERE project_id = ? 
-            ORDER BY number ASC;
-    
-        `,[project_id])
-    // console.log("screenshot pessss *-*****************************", screenshot)
-    //
-    // pScreenshot.map(data=> screenshot.push({
-    //     id: data.id,
-    //     screenshot: data.screenshot,
-    //     details: data.details,
-    //     number: data.number
-    // }));
-    // pFeatures.map(data=> features.push({
-    //     id: data.id,
-    //     feature: data.feature,
-    //     description: data.description,
-    //     img: data.img
-    // }));
-    // pTools.map(data=> tools.push({
-    //     id: data.id,
-    //     tools: data.tools,
-    //     icon: data.icon
-    // }));
-    // pLanguage.map(data=> language.push({
-    //     id:data.id,
-    //     language:data.language,
-    //     icon:data.icon
-    // }))
-    project[0].person = pPerson[0];
-    project[0].tools = pTools //tools;
-    project[0].feature = pFeatures;
-    project[0].screenshot = pScreenshot;
-    project[0].language = pLanguage//language;
+    const project_screenshot= await pool.query(`call sp_getProjects_screenshot(${project_id});`)
+    project.screenshots = project_screenshot[0];
 
-    res.json(project[0])
-
+    res.json(project)
 
 }
 
