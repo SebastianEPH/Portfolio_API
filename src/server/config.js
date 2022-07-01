@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
-const {database} = require('../database/key')
 // const session = require('express-session')
 // const MysqlStore = require('express-mysql-session')
 // const auth = require('../routes/auth')
@@ -53,8 +52,10 @@ module.exports = (app) => {
 
     app.use(baseApi , require('../routes/data'));
 
+    app.use(baseApi, require('../routes/projects/features')); // only projects
     app.use(baseApi, require('../routes/projects/projects')); // only projects
-    app.use(baseApi, require('../routes/project'));
+
+    // app.use(baseApi, require('../routes/project'));
     // app.use('/api/auth/', auth);
     // app.use(routers_index);
     // app.use('/task',routers_index);

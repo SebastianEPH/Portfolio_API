@@ -66,7 +66,7 @@ project.getOnlyProjectShort = async(req, res)=>{
     res.json(project)
 }
 
-project.AddFeature= async(req, res)=>{
+project.addFeatures= async(req, res)=>{
     const {project_id} = req.params
     //parse IDs from params
     const parseIds = parse.IdForDB([project_id])
@@ -76,7 +76,6 @@ project.AddFeature= async(req, res)=>{
     const parseBody= parse.ObjDB({...req.body,  project_id},["feature", "description", "img"], [], ["project_id"])
     if(!parseBody.passed){return res.status(parseBody.status).json({message:parseBody.message})}
 
-    console.log("esto es el parse ",parseBody)
     try{ // try connection
         const query = await pool.query(`
              INSERT INTO 
@@ -93,7 +92,7 @@ project.AddFeature= async(req, res)=>{
     }
 }
 
-project.updateFeature = async(req, res)=>{
+project.updateFeatures = async(req, res)=>{
     const {project_id} = req.params
     //parse IDs from params
     const parseIds = parse.IdForDB([project_id, req.body.id])
