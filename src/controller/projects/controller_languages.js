@@ -3,23 +3,23 @@ const {DB, parse} = require("../../helpers/helpers");
 
 project = {};
 project.getLanguages = async(req, res)=>{
-    const {project_id} = req.params
+    const {projects_id} = req.params
 
-    const projectsLanguage = await pool.query(`call sp_getProjects_languages(${project_id});`)
+    const projectsLanguage = await pool.query(`call sp_getProjects_languages(${projects_id});`)
     res.json(projectsLanguage[0])
 }
 
 project.deleteLanguages = async(req, res)=>{
-    const {project_id, language_id} = req.params
+    const {projects_id, languages_id} = req.params
 
     try{ // try connection
-        console.log("las params son", project_id, language_id)
+        console.log("las params son", projects_id, languages_id)
         const query = await pool.query(`
             DELETE FROM project_language
             WHERE project_id = ? 
             AND 
             id = ?
-        `,[project_id,language_id])
+        `,[projects_id,languages_id])
         console.log("delete ",query)
         const response =  DB.responseDel(query)
         return res.status(response.status).json({message:response.message})
@@ -28,10 +28,10 @@ project.deleteLanguages = async(req, res)=>{
     }
 }
 project.addLanguages = async(req, res)=>{
-    const {project_id} = req.params
+    const {projects_id} = req.params
 
     // chack if the object data matches
-    const parseBody= parse.ObjDB({...req.body,  project_id},[], [], ["project_id", "language"])
+    const parseBody= parse.ObjDB({...req.body,  projects_id},[], [], ["projects_id", "language"])
     if(!parseBody.passed){return res.status(parseBody.status).json({message:parseBody.message})}
 
     console.log("esto es el parse ",parseBody)

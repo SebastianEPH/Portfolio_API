@@ -3,17 +3,17 @@ const {parse, DB} = require("../../helpers/helpers");
 
 project = {}
 project.getScreenshots= async(req, res)=>{
-    const {project_id} = req.params
+    const {projects_id} = req.params
 
-    const projectsScreenshots = await pool.query(`call sp_getProjects_screenshots(${project_id});`)
+    const projectsScreenshots = await pool.query(`call sp_getProjects_screenshots(${projects_id});`)
     res.json(projectsScreenshots[0])
 }
 
 project.addScreenshots = async(req, res)=>{
-    const {project_id} = req.params
+    const {projects_id} = req.params
 
     // chack if the object data matches
-    const parseBody= parse.ObjDB({...req.body,  project_id},["screenshot", "details", "number"], [], ["project_id"])
+    const parseBody= parse.ObjDB({...req.body,  projects_id},["screenshot", "details", "number"], [], ["project_id"])
     if(!parseBody.passed){return res.status(parseBody.status).json({message:parseBody.message})}
 
     console.log("esto es el parse ",parseBody)
@@ -34,7 +34,7 @@ project.addScreenshots = async(req, res)=>{
 }
 
 project.updateScreenshots = async(req, res)=>{
-    const {project_id} = req.params
+    const {projects_id} = req.params
 
     // chack if the object data matches
     const parseBody= parse.ObjDB(req.body,["screenshot", "details", "number"], [], ["id"])
@@ -48,7 +48,7 @@ project.updateScreenshots = async(req, res)=>{
              WHERE id= ? 
              AND project_id = ? 
    
-        `,[parseBody.data, req.body.id, project_id])
+        `,[parseBody.data, req.body.id, projects_id])
         const response =  DB.responseUpd(query)
         // console.log("query maquillado ",response)
         console.log("query ",query)
@@ -61,16 +61,16 @@ project.updateScreenshots = async(req, res)=>{
 }
 
 project.deleteScreenshots = async(req, res)=>{
-    const {project_id, screenshot_id} = req.params
+    const {projects_id, screenshots_id} = req.params
 
     try{ // try connection
-        console.log("las params son", project_id, screenshot_id)
+        console.log("las params son", projects_id, screenshots_id)
         const query = await pool.query(`
             DELETE FROM project_screenshot
             WHERE project_id = ? 
             AND 
             id = ?
-        `,[project_id,screenshot_id])
+        `,[projects_id,screenshots_id])
         console.log("delete ",query)
         const response =  DB.responseDel(query)
         return res.status(response.status).json({message:response.message})
