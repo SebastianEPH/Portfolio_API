@@ -1,9 +1,31 @@
-const { body, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 
+function isIDSQL(id){
+    if(!id){return false}
+    if(id.length< 1 || id.length >8){
+        console.log('length', id.length, "el la longitud del id es menor que 1 y mayor que 8 ")
+        return false
+    }else{
+        console.log('El ID SQL se verificó correctamente')
+    }
+    return !isNaN(id)
+}
+function errorResponse(nameParams, dataParams){
+    return {
+        ok:false,
+        errors: {
+            name:{
+                msg:"El parametro ["+nameParams+"] ID enviado no es válidos",
+                param:nameParams,
+                param_data: dataParams+ '',
+                location:"params"
+            }}
+    }
+}
 
-const helpers ={}
+const valideIDSQL ={}
 
-helpers.valideFields = (req, res, next)=>{
+valideIDSQL.valideFields = (req, res, next)=>{
     const errors = validationResult(req)
     // manejo de errores de validación
     if (!errors.isEmpty()){
@@ -14,55 +36,44 @@ helpers.valideFields = (req, res, next)=>{
     }
     next();
 }
-helpers.checkIDSQL = (req, res, next)=>{
-    console.log("entroi a varificacion");
-    function isIDSQL(id){
-        if(!id){return false}
-        if(id.length< 1 || id.length >8){
-            console.log('length', id.length, "el la longitud del id es menor que 1 y mayor que 8 ")
-            return false
-        }else{
-            console.log('El ID SQL se verificó correctamente')
-        }
-
-        return !isNaN(id)
+valideIDSQL.project_id = (req, res, next)=>{
+    const nameParams = 'projects_id';
+    const dataParams = (req.params)[nameParams]
+    if(!isIDSQL(dataParams)){
+        return res.status(402).json(errorResponse(nameParams, dataParams))
     }
-    if(!isIDSQL(req.params.id)){
-        return res.status(402).json({
-            ok:false,
-            errors: {
-                name:{
-                    msg:"El ID enviado no es valido",
-                    param:"param id",
-                    location:"params"
-                }}
-        })
-    }
-    next()
+    next();
 }
-helpers.checkProjectsID = (req, res, next)=>{
-    function isIDSQL(id){
-        if(!id){return false}
-        if(id.length< 1 || id.length >8){
-            console.log('length', id.length, "el la longitud del id es menor que 1 y mayor que 8 ")
-            return false
-        }else{
-            console.log('El ID SQL se verificó correctamente')
-        }
-
-        return !isNaN(id)
+valideIDSQL.features_id = (req, res, next)=>{
+    const nameParams = 'features_id';
+    const dataParams = (req.params)[nameParams]
+    if(!isIDSQL(dataParams)){
+        return res.status(402).json(errorResponse(nameParams, dataParams))
     }
-    if(!isIDSQL(req.params.projects_id)){
-        return res.status(402).json({
-            ok:false,
-            errors: {
-                name:{
-                    msg:"El parametro ID enviado no es válido",
-                    param:"projects_id",
-                    location:"params"
-                }}
-        })
-    }
-    next()
+    next();
 }
-module.exports = helpers;
+valideIDSQL.languages_id = (req, res, next)=>{
+    const nameParams = 'languages_id';
+    const dataParams = (req.params)[nameParams]
+    if(!isIDSQL(dataParams)){
+        return res.status(402).json(errorResponse(nameParams, dataParams))
+    }
+    next();
+}
+valideIDSQL.screenshots_id = (req, res, next)=>{
+    const nameParams = 'screenshots_id';
+    const dataParams = (req.params)[nameParams]
+    if(!isIDSQL(dataParams)){
+        return res.status(402).json(errorResponse(nameParams, dataParams))
+    }
+    next();
+}
+valideIDSQL.tools_id = (req, res, next)=>{
+    const nameParams = 'tools_id';
+    const dataParams = (req.params)[nameParams]
+    if(!isIDSQL(dataParams)){
+        return res.status(402).json(errorResponse(nameParams, dataParams))
+    }
+    next();
+}
+module.exports = valideIDSQL;

@@ -23,39 +23,39 @@ project.getAllProjects = async(req, res)=>{
     }
     return res.json(projects)
 }
-project.getOnlyProject = async(req, res)=>{
-    const {project_id} = req.params
+project.getOnlyProjects = async(req, res)=>{
+    const {projects_id} = req.params
 
-    let responseProject = await pool.query(`call sp_getProjects(${project_id});`)
-    let project = responseProject[0][0];
+    const responseProjects = await pool.query(`call sp_getProjects(${projects_id});`)
 
-    const tools = await pool.query(`call sp_getProjects_tools(${project_id});`)
+    const tools = await pool.query(`call sp_getProjects_tools(${projects_id});`)
+    const languages = await pool.query(`call sp_getProjects_languages(${projects_id});`)
+    const project_features = await pool.query(`call sp_getProjects_features(${projects_id});`)
+    const project_screenshot= await pool.query(`call sp_getProjects_screenshots(${projects_id});`)
+
+    let project = responseProjects[0][0];
+    project.screenshots = project_screenshot[0];
     project.tools = tools[0];
-
-    const languages = await pool.query(`call sp_getProjects_languages;(${project_id});`)
-    project.languages = languages[0];
-
-    const project_features = await pool.query(`call sp_getProjects_features(${project_id});`)
     project.features = project_features[0];
 
-    const project_screenshot= await pool.query(`call sp_getProjects_screenshots(${project_id});`)
-    project.screenshots = project_screenshot[0];
+    project.languages = languages[0];
 
     res.json(project)
+
 }
 project.getAllProjectsShort = async(req, res)=>{
     const responseProjects  = await pool.query(`call sp_getAllProjects();`);
     const projects = responseProjects[0]
-    console.log("all")
     return res.json(projects)
 }
-project.getOnlyProjectShort = async(req, res)=>{
-    const {project_id} = req.params
-
-    let responseProject = await pool.query(`call sp_getProjects(${project_id});`)
-    let project = responseProject[0][0];
-
-    res.json(project)
+project.getOnlyProjectsShort = async(req, res)=>{
+    const {projects_id} = req.params
+        console.log('hola=> ', req.params)
+    let responseProjects = await pool.query(`call sp_getProjects(${projects_id});`)
+    let project = responseProjects[0][0];
+    // console.log(" response projects =>",responseProjects)
+    // console.log('projects=> ',project || [])
+    res.json(project || [])
 }
 
 module.exports = project;

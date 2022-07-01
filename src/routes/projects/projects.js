@@ -1,16 +1,14 @@
 const express  =  require('express');
 const routes = express.Router();
 const projects =  require("../../controller/controller_project");
-const verify = require("../../midlewares/valide");
+const {project_id} = require("../../midlewares/valide");
 
 
-routes.get("/projects", projects.getAllProjects)
-routes.get("/projects/short", projects.getAllProjectsShort)
+routes.get("/my/projects", projects.getAllProjects)
+routes.get("/my/projects_short/", projects.getAllProjectsShort)
 
-routes.use(verify.checkProjectsID)
-
-routes.get('/projects/:projects_id', projects.getOnlyProject)
-routes.get('/projects/short/:projects_id', projects.getOnlyProjectShort)
+routes.get('/my/projects/:projects_id', [project_id],  projects.getOnlyProjects)
+routes.get('/my/projects_short/:projects_id', [project_id], projects.getOnlyProjectsShort)
 
 
 module.exports = routes;
