@@ -65,7 +65,17 @@ project.getOnlyProjectShort = async(req, res)=>{
 
     res.json(project)
 }
+project.getFeatures= async(req, res)=>{
+    const {project_id} = req.params
+    //parse IDs from params
+    const parseIds = parse.IdForDB([project_id])
+    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
+    let responseFeatures = await pool.query(`call sp_getProjects_features(${project_id});`)
+    let projects_features = responseFeatures[0];
+
+    res.json(projects_features)
+}
 project.addFeatures= async(req, res)=>{
     const {project_id} = req.params
     //parse IDs from params
