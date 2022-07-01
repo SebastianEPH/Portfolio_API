@@ -3,7 +3,7 @@ const pool = require("../database/database");
 const project = {}
 
 
-project.getProjectsAll = async(req, res)=>{
+project.getAllProjects = async(req, res)=>{
 
     const responseProjects  = await pool.query(`call sp_getAllProjects();`);
     const projects = responseProjects[0]
@@ -24,7 +24,8 @@ project.getProjectsAll = async(req, res)=>{
     }
     return res.json(projects)
 }
-project.getProjectOnly = async(req, res)=>{
+project.getOnlyProject = async(req, res)=>{
+    console.log("only")
     const {project_id} = req.params
     //parse IDs from params
     const parseIds = parse.IdForDB([project_id])
@@ -46,7 +47,23 @@ project.getProjectOnly = async(req, res)=>{
     project.screenshots = project_screenshot[0];
 
     res.json(project)
+}
+project.getAllProjectsShort = async(req, res)=>{
+    const responseProjects  = await pool.query(`call sp_getAllProjects();`);
+    const projects = responseProjects[0]
+    console.log("all")
+    return res.json(projects)
+}
+project.getOnlyProjectShort = async(req, res)=>{
+    const {project_id} = req.params
+    //parse IDs from params
+    const parseIds = parse.IdForDB([project_id])
+    if(!parseIds.passed){return res.status(parseIds.status).json({message:parseIds.message})}
 
+    let responseProject = await pool.query(`call sp_getProjects(${project_id});`)
+    let project = responseProject[0][0];
+
+    res.json(project)
 }
 
 project.AddFeature= async(req, res)=>{
