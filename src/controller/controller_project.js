@@ -10,10 +10,16 @@ project.getProjectsAll = async(req, res)=>{
 
     for (let i = 0; i < projects.length; i++) {
         const programming_tools = await pool.query(`call sp_getProjects_programmingTools(${projects[i].id});`)
-        projects[i].programming_tools = programming_tools[0];
+        projects[i].tools = programming_tools[0];
 
         const programming_language = await pool.query(`call sp_getProjects_programmingLanguage(${projects[i].id});`)
-        projects[i].programming_language = programming_language[0];
+        projects[i].languages = programming_language[0];
+
+        const projects_features = await pool.query(`call sp_getProjects_features(${projects[i].id});`)
+        projects[i].features = projects_features[0];
+
+        const projects_screenshot= await pool.query(`call sp_getProjects_screenshot(${projects[i].id});`)
+        projects[i].screenshots = projects_screenshot[0];
 
     }
     return res.json(projects)
