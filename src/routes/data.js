@@ -1,13 +1,9 @@
 const express = require('express');
 const routes = express.Router();
-
 const data = require("../controller/controller_data")
-// const accessToken = require('../middleware/index')
-// const {verifyToken} = require ("../middleware/index")
 
-// data
 routes.get('/my', data.getAll)
-    // routes.get('/my/project/:project_id', person.getProjectOnly)
+routes.get('/my/short', data.getAllShort)
 
 routes.get('/my/language', data.getLanguage)
 

@@ -2,65 +2,27 @@ data = {}
 const pool = require('../database/database')
 
 data.getAll = async(req, res)=>{
-    let myData = {}
-    const person = await pool.query(`
-        SELECT * 
-        from  person
-    `)
-    const person_contact = await pool.query(`
-        SELECT * 
-        from  person_contact
-    `)
-    const person_languages = await pool.query(`
-        SELECT 
-        languages.id,
-        languages.language,
-        languages.dificulty as "dificulty_id",
-        dificulty.dificulty
-        from  languages
-        left join dificulty ON languages.dificulty = dificulty.id
-    `)
-    const extra_knowledge = await pool.query(`
-        SELECT 
-        extra_knowledge.id,
-        extra_knowledge.knowlegge,
-        extra_knowledge.icon,
-        dificulty.id as "dificulty_id",
-        dificulty.dificulty 
-        from  extra_knowledge
-        left join dificulty ON extra_knowledge.dificulty = dificulty.id
-    `)
-    const programming_language = await pool.query(`
-        SELECT 
-        programming_language.language,
-        programming_language.name_short,
-        programming_language.icon,
-        dificulty.dificulty 
-        from  programming_language
-        left join dificulty ON programming_language.dificulty = dificulty.id
-    `)
-    const programming_tools = await pool.query(`
-        SELECT 
-        programming_tools.tools,
-        programming_tools.icon,
-        dificulty.dificulty 
-        from  programming_tools
-        left join dificulty ON programming_tools.dificulty = dificulty.id
-        where programming_tools.lib  = 1
-    `)
+    const information = await pool.query(`call sp_getMyInformation();`);
+    const socialNetworks = await pool.query(`call sp_getMySocialNetworks();`);
+    const languages = await pool.query(`call sp_getMyLanguages();`);
+    const extra_knowedger = await pool.query(`call sp_getMyExtraKnowledge();`);
+    const programmingLanguages = await pool.query(`call sp_getMyProgrammingLanguages();`);
+    const programmingTools = await pool.query(`call sp_getMyProgrammingTools();`);
 
-    myData = {...person[0]}
-    myData.programming_language = programming_language
-    myData.programming_tools = programming_tools
-    myData.contact = person_contact
-    myData.languages = person_languages
-    myData.extra_knowledge = extra_knowledge
+    let myInformation = information[0][0] ;
 
+    myInformation.social_networks = socialNetworks[0];
+    myInformation.languages = languages[0];
+    myInformation.extra_knowedger = extra_knowedger[0];
+    myInformation.programming_languages = programmingLanguages[0];
+    myInformation.programming_tools = programmingTools[0];
 
-    console.log(myData)
-
-    res.json(myData)
-
+    res.json(myInformation)
+}
+data.getAllShort = async(req, res)=>{
+    const information = await pool.query(`call sp_getMyInformation();`);
+    let myInformation = information[0][0] ;
+    res.json(myInformation)
 }
 
 data.getLanguage = async(req, res)=>{
