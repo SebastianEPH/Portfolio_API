@@ -35,57 +35,40 @@ feature.add= async(req, res, next)=>{
     ]
     try{
         const query = await pool.query('call sp_addProjects_features(?,?,?,?);', data)
-        const {status, msg, ok } =  responseMessage.addSP(query);
+        const {status, msg, ok } =  responseMessage.add(query);
         return res.status(status).json({ok, msg})
     }catch (E){
         console.log(E)
-        return res.status(400).json({message:"The submitted data cannot be processed"})
+        return res.status(400).json({msg:"The submitted data cannot be processed"})
     }
 }
-
 feature.update = async(req, res)=>{
-    const {projects_id} = req.params
-
-    // chack if the object data matches
-    const parseBody= parse.ObjDB({...req.body},["feature", "description", "img"], [], [])
-    if(!parseBody.passed){return res.status(parseBody.status).json({message:parseBody.message})}
-
-    try{ // try connection
-        const query = await pool.query(`
-             UPDATE 
-             project_feature 
-             set ?  
-             WHERE id= ? 
-             AND project_id = ? 
-   
-        `,[parseBody.data, req.body.id, projects_id])
-        const response =  DB.responseUpd(query)
-        console.log("query maquillado ",response)
-        console.log("query ",query)
-        return res.status(response.status).json({message:response.message})
+    const {projects_id, features_id} = req.params
+    const data = [
+        projects_id ,
+        features_id ,
+        req.body.feature ,
+        req.body.img || null,
+        req.body.description || null
+    ]
+    try{
+        const query = await pool.query(`call sp_updProjects_features(?,?,?,?,?);`,data)
+        const {status, msg, ok } = responseMessage.update(query);
+        res.status(status).json({ok, msg});
     }catch (E){
-        console.log(E)
-        return res.status(400).json({message:"Error fatal, No se pudo procesar la consulta"})
+        return res.status(400).json({msg:"Erro in server"})
     }
-
 }
 
 feature.remove = async(req, res)=>{
     const {projects_id, features_id} = req.params
-
-    try{ // try connection
-        console.log("las params son", projects_id, features_id)
-        const query = await pool.query(`
-            DELETE FROM project_feature
-            WHERE project_id = ? 
-            AND 
-            id = ?
-        `,[projects_id,features_id])
-        console.log("delete ",query)
-        const response =  DB.responseDel(query)
-        return res.status(response.status).json({message:response.message})
+    try{
+        const data = [projects_id , features_id]
+        const query = await pool.query(`call sp_delProjects_features(?,?);`,data)
+        const {status, msg, ok }  = responseMessage.remove(query);
+        res.status(status).json({ok, msg})
     }catch (E){
-        return res.status(400).json({message:"Hubo un error al procesar los datos"})
+        return res.status(400).json({msg:"Hubo un error en el server",E})
     }
 }
 module.exports = feature;

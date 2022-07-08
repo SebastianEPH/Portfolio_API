@@ -2,7 +2,7 @@ const checkFields = {};
 
 // regex zone
 const baseUrl = /^https|http:\/\//i;
-const imgExtension =  /(jpg|jpeg|png|bmp|gif|tif|tiff|SVG|$)/ig;
+const imgExtension =  /(jpg|jpeg|png|bmp|gif|tif|tiff|SVG$)/ig;
 
 checkFields.isLinkImg = (value, {req, location, path})=>{
     // const reg = new RegExp("this","gi");

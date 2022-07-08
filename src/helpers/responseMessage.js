@@ -2,8 +2,7 @@ responseMessage = {}
 
 // SP = Store Procedure
 
-responseMessage.addSP = (response) =>{
-    console.log("Add store procedure: ", response);
+responseMessage.add = (response) =>{
     let msg = '';
     let ok= true;
     let status = 200;
@@ -11,7 +10,7 @@ responseMessage.addSP = (response) =>{
     if(response.serverStatus ===2 ){
         if(response.affectedRows === 0  ){
             ok = false
-            msg = "No tienes los permisos para agregar los valores o ocurrio un problema "
+            msg = "No se pudo agregar un nuevo dato, quizas no exista el id que hace referencia"
             status = 406
         }
         if(response.affectedRows === 1){
@@ -36,11 +35,70 @@ responseMessage.addSP = (response) =>{
         msg
     }
 }
-responseMessage.add = (response) =>{
-    return responseMessage.addSP(response)
+responseMessage.update = (response)=>{
+    let msg = '';
+    let ok= true;
+    let status = 200;
+
+    if(response.serverStatus ===2 ){
+        if(response.affectedRows === 0  ){
+            ok = false
+            msg = "Error, id not exists "
+            status = 406
+        }
+        if(response.affectedRows === 1){
+            ok = true;
+            msg = "Was update successfully";
+            status = 200;
+        }
+        if(response.affectedRows > 1 ){
+            ok = true;
+            msg = "Were updated successfully";
+            status = 200;
+        }
+    }else{
+        ok = false;
+        msg = "Server Database Error";
+        status = 500;
+    }
+    return {
+        ok,
+        status,
+        msg
+    }
 }
+responseMessage.remove = (response)=>{
+    let msg = '';
+    let ok= true;
+    let status = 200;
+    console.log(response)
 
-
-
+    if(response.serverStatus ===2 ){
+        if(response.affectedRows === 0  ){
+            ok = false
+            msg = "Error, id not exists "
+            status = 406
+        }
+        if(response.affectedRows === 1){
+            ok = true;
+            msg = "Was removed successfully";
+            status = 200;
+        }
+        if(response.affectedRows > 1 ){
+            ok = true;
+            msg = "Were removed successfully";
+            status = 200;
+        }
+    }else{
+        ok = false;
+        msg = "Server Database Error";
+        status = 500;
+    }
+    return {
+        ok,
+        status,
+        msg
+    }
+}
 
 module.exports = responseMessage;
