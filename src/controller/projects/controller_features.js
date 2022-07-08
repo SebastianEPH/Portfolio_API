@@ -1,37 +1,49 @@
 const pool = require("../../database/database");
-const {parse, DB} = require("../../helpers/helpers");
+const {parse, DB, trimBody} = require("../../helpers/helpers");
+const {check} = require("express-validator");
+const checkFields= require("../../midlewares/checkFields")
+const responseMessage = require("../../helpers/responseMessage");
 
-project = {};
-project.getFeatures= async(req, res)=>{
+feature = {};
+feature.getAll= async(req, res)=>{
     const {projects_id} = req.params
 
     const projectsFeatures = await pool.query(`call sp_getProjects_features(${projects_id});`)
     res.json(projectsFeatures[0])
 }
-project.addFeatures= async(req, res)=>{
+feature.addVerifyFields = [
+    trimBody,
+    check("feature").not()
+        .isEmpty()
+        .withMessage('El Nombre es obligatorio')
+        .isLength({min:1, max:150})
+        .withMessage('El nombre debe ser mayor que 2 y menor que 70 caracteres después '),
+    check("img", "Debe ser un URL que contenga una imagen").not()
+        .isNumeric()
+        .withMessage('is numeric')
+        .isLength({max:1024})
+        .withMessage('el link no puede ser mayor que 1024 caracteres ')
+        .custom(checkFields.isLinkImg)
+]
+feature.add= async(req, res, next)=>{
     const {projects_id} = req.params
-
-    // chack if the object data matches
-    const parseBody= parse.ObjDB({...req.body,  projects_id},["feature", "description", "img"], [], ["project_id"])
-    if(!parseBody.passed){return res.status(parseBody.status).json({message:parseBody.message})}
-
-    try{ // try connection
-        const query = await pool.query(`
-             INSERT INTO 
-             project_feature 
-             set ? 
-        `,[parseBody.data])
-
-        const response =  DB.responseAdd(query)
-        console.log(response)
-        return res.status(response.status).json({message:response.message})
+    const data = [
+        projects_id ,
+        req.body.feature ,
+        req.body.img || null,
+        req.body.description || null
+    ]
+    try{
+        const query = await pool.query('call sp_addProjects_features(?,?,?,?);', data)
+        const {status, msg, ok } =  responseMessage.addSP(query);
+        return res.status(status).json({ok, msg})
     }catch (E){
         console.log(E)
         return res.status(400).json({message:"The submitted data cannot be processed"})
     }
 }
 
-project.updateFeatures = async(req, res)=>{
+feature.update = async(req, res)=>{
     const {projects_id} = req.params
 
     // chack if the object data matches
@@ -58,7 +70,7 @@ project.updateFeatures = async(req, res)=>{
 
 }
 
-project.deleteFeatures = async(req, res)=>{
+feature.remove = async(req, res)=>{
     const {projects_id, features_id} = req.params
 
     try{ // try connection
@@ -76,4 +88,4 @@ project.deleteFeatures = async(req, res)=>{
         return res.status(400).json({message:"Hubo un error al procesar los datos"})
     }
 }
-module.exports = project;
+module.exports = feature;

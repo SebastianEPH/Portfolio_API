@@ -76,4 +76,25 @@ valideIDSQL.tools_id = (req, res, next)=>{
     }
     next();
 }
+valideIDSQL.isLink = (req, res)=>{
+    // debe verificar que sea un  link
+    console.log("Esto son los parametros "+req.params)
+    return true;
+}
+valideIDSQL.AceptarParseNull = (value, {req, res, next})=>{ // lo de ariba no es necesario , tampoc el value , ya que previamente ya se va enviando
+    // if (value !== req.body.password) {
+        throw new Error('mensaje personalizado, pero dentor ');
+
+
+    // O debe terornar false tambien,
+
+
+
+    // }
+    console.log('esto paso??');
+    // Indicates the success of this synchronous custom validator
+    return false;
+}
+
+
 module.exports = valideIDSQL;

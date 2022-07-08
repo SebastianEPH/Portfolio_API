@@ -78,6 +78,8 @@ helpers.parse.ObjDB = (objBody, letters=[], FK_ID=[], ID=[]) => {
     return  obj
 }
 
+
+
 helpers.DB.responseAdd =(response)=>{
     return responseDBType(response, "add");
 }
@@ -131,6 +133,13 @@ responseDBType = (response,nameType)=>{
     }
     console.log(obj.message, response)
     return obj
+}
+helpers.trimBody=(req, res,next)=>{
+    for (let key in (req.body)) {
+        // if (typeof (req.body[key]+"") !== 'undefined' || req.body[key] !== undefined|| req.body[key] !== null){}
+        req.body[key] = (req.body[key]+"").trim();
+    }
+    next();
 }
 
 module.exports = helpers;
