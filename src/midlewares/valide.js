@@ -36,7 +36,7 @@ valideIDSQL.valideFields = (req, res, next)=>{
     }
     next();
 }
-valideIDSQL.project_id = (req, res, next)=>{
+valideIDSQL.projects_id = (req, res, next)=>{
     const nameParams = 'projects_id';
     const dataParams = (req.params)[nameParams]
     if(!isIDSQL(dataParams)){
