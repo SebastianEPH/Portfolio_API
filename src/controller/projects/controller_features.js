@@ -8,13 +8,14 @@ feature = {};
 feature.getAll= async(req, res)=>{
     const {projects_id} = req.params
     const projectsFeatures = await pool.query(`call sp_getProjects_featuresAll(?);`,[projects_id])
-    res.json(projectsFeatures[0])
+    const {status, data} = responseMessage.get(projectsFeatures);
+    res.status(status).json(data);
 }
 feature.getOnly= async(req, res)=>{
     const {projects_id,features_id} = req.params
-    const data = [projects_id, features_id]
-    const projectsFeatures = await pool.query(`call sp_getProjects_features(?,?);`,data)
-    res.json(projectsFeatures[0][0])
+    const projectsFeatures = await pool.query(`call sp_getProjects_features(?,?);`,[projects_id, features_id])
+    const {status, data} = responseMessage.getOnly(projectsFeatures);
+    res.status(status).json(data);
 }
 feature.addVerifyFields = [
     trimBody,

@@ -1,7 +1,14 @@
 responseMessage = {}
 
 // SP = Store Procedure
-
+responseMessage.get = (response) =>{
+    const status = response[0].length >= 1 ? 200 : 404;
+    return {status, data:response[0] }
+}
+responseMessage.getOnly = (response) =>{
+    const status = response[0].length >= 1 ? 200 : 404;
+    return {status, data:response[0][0] || []}
+}
 responseMessage.add = (response) =>{
     let msg = '';
     let ok= true;
