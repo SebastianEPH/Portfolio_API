@@ -44,8 +44,8 @@ feature.add= async(req, res, next)=>{
         const {status, msg, ok } =  responseMessage.add(query);
         return res.status(status).json({ok, msg})
     }catch (E){
-        console.log(E)
-        return res.status(400).json({msg:"The submitted data cannot be processed"})
+        const {ok, errors} =  responseMessage.err(E);
+        return res.status(400).json({ok,errors})
     }
 }
 feature.update = async(req, res)=>{
@@ -62,19 +62,20 @@ feature.update = async(req, res)=>{
         const {status, msg, ok } = responseMessage.update(query);
         res.status(status).json({ok, msg});
     }catch (E){
-        return res.status(400).json({msg:"Erro in server"})
+        const {ok, errors} =  responseMessage.err(E);
+        return res.status(400).json({ok,errors})
     }
 }
 
 feature.remove = async(req, res)=>{
     const {projects_id, features_id} = req.params
     try{
-        const data = [projects_id , features_id]
-        const query = await pool.query(`call sp_delProjects_features(?,?);`,data)
+        const query = await pool.query(`call sp_delProjects_features(?,?);`,[projects_id , features_id])
         const {status, msg, ok }  = responseMessage.remove(query);
         res.status(status).json({ok, msg})
     }catch (E){
-        return res.status(400).json({msg:"Hubo un error en el server",E})
+        const {ok, errors} =  responseMessage.err(E);
+        return res.status(400).json({ok,errors})
     }
 }
 module.exports = feature;

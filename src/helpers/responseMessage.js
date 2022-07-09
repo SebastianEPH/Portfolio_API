@@ -50,7 +50,7 @@ responseMessage.update = (response)=>{
     if(response.serverStatus ===2 ){
         if(response.affectedRows === 0  ){
             ok = false
-            msg = "Error, id not exists "
+            msg = "Error, el id que hace referencia no existe " // tratar de ser más especifico.
             status = 406
         }
         if(response.affectedRows === 1){
@@ -83,7 +83,7 @@ responseMessage.remove = (response)=>{
     if(response.serverStatus ===2 ){
         if(response.affectedRows === 0  ){
             ok = false
-            msg = "Error, id not exists "
+            msg = "Error ,El id que usted hace referencia no existe "
             status = 406
         }
         if(response.affectedRows === 1){
@@ -106,6 +106,23 @@ responseMessage.remove = (response)=>{
         status,
         msg
     }
+}
+responseMessage.err = (err)=>{
+    let msg = 'Error desconocido';
+    if(err.code === "ER_NO_REFERENCED_ROW_2" && err.errno === 1452){
+        msg="ID Llave foranea erronea";
+    }
+    return {
+        ok:false,
+        errors: {
+            sql:{
+                msg,
+                sql_msg: err.sqlMessage,
+                sqlState:err.sqlState,
+            }
+        }
+    }
+
 }
 
 module.exports = responseMessage;
