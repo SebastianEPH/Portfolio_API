@@ -1,5 +1,5 @@
 const pool = require("../../database/database");
-const {parse, DB, trimBody} = require("../../helpers/helpers");
+const {trimBody} = require("../../helpers/helpers");
 const {check} = require("express-validator");
 const checkFields= require("../../midlewares/checkFields")
 const responseMessage = require("../../helpers/responseMessage");
@@ -7,9 +7,14 @@ const responseMessage = require("../../helpers/responseMessage");
 feature = {};
 feature.getAll= async(req, res)=>{
     const {projects_id} = req.params
-
-    const projectsFeatures = await pool.query(`call sp_getProjects_features(${projects_id});`)
+    const projectsFeatures = await pool.query(`call sp_getProjects_featuresAll(?);`,[projects_id])
     res.json(projectsFeatures[0])
+}
+feature.getOnly= async(req, res)=>{
+    const {projects_id,features_id} = req.params
+    const data = [projects_id, features_id]
+    const projectsFeatures = await pool.query(`call sp_getProjects_features(?,?);`,data)
+    res.json(projectsFeatures[0][0])
 }
 feature.addVerifyFields = [
     trimBody,
