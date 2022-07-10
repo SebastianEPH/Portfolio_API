@@ -16,11 +16,14 @@ language.getOnly= async(req, res)=>{
     const {status, data} = responseMessage.getOnly(response);
     res.status(status).json(data);
 }
-language.addVerifyFields = [
-    check("languages_id").not()
+language.addVerify = [
+    check("languages_id").not() // body
         .isEmpty()
         .withMessage('El ID es obligatorio')
-        .custom(checkFields.isIDSQL)
+        .isNumeric()
+        .withMessage('No pueder ser string, solo deben ser numeros')
+        .isLength({min:1, max:10})
+        .withMessage('El ID debe ser mayor que 1 y menor que 10')
 ]
 language.add = async (req, res)=>{
     const {projects_id} = req.params
