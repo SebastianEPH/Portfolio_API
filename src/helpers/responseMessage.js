@@ -35,12 +35,7 @@ responseMessage.add = (response) =>{
         msg = "Server Database Error";
         status = 500;
     }
-
-    return {
-        ok,
-        status,
-        msg
-    }
+    return {ok, status, msg}
 }
 responseMessage.update = (response)=>{
     let msg = '';
@@ -101,24 +96,26 @@ responseMessage.remove = (response)=>{
         msg = "Server Database Error";
         status = 500;
     }
-    return {
-        ok,
-        status,
-        msg
-    }
+    return { ok, status, msg }
 }
 responseMessage.err = (err)=>{
+    console.log("Err=> ", err)
     let msg = 'Error desconocido';
     if(err.code === "ER_NO_REFERENCED_ROW_2" && err.errno === 1452){
         msg="ID Llave foranea erronea";
+    }
+    if (err.code === "ECONNREFUSED"){
+        msg= "Error de connexión";
     }
     return {
         ok:false,
         errors: {
             sql:{
                 msg,
-                sql_msg: err.sqlMessage,
+                code: err.code,
+                sql_msg: err.sqlMessage || err.syscall,
                 sqlState:err.sqlState,
+                address: err.address
             }
         }
     }

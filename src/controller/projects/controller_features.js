@@ -26,7 +26,7 @@ feature.addVerifyFields = [
         .withMessage('El nombre debe ser mayor que 2 y menor que 70 caracteres después '),
     check("img", "Debe ser un URL que contenga una imagen").not()
         .isNumeric()
-        .withMessage('is numeric')
+        .withMessage('No puede sernumeros')
         .isLength({max:1024})
         .withMessage('el link no puede ser mayor que 1024 caracteres ')
         .custom(checkFields.isLinkImg)

@@ -12,7 +12,6 @@ language.getAll= async(req, res)=>{
 }
 language.getOnly= async(req, res)=>{
     const {projects_id, languages_id} = req.params
-    console.log("projects: ", projects_id, "languages: ", languages_id)
     const response = await pool.query(`call sp_getProjects_languages(?,?);`,[projects_id, languages_id])
     const {status, data} = responseMessage.getOnly(response);
     res.status(status).json(data);
@@ -27,7 +26,6 @@ language.add = async (req, res)=>{
     const {projects_id} = req.params
     try{
         const query = await pool.query('call sp_addProjects_languages(?,?);', [projects_id, req.body.languages_id]);
-        console.log(query)
         const {status, msg, ok } =  responseMessage.add(query);
         return res.status(status).json({ok, msg})
     }catch (E){

@@ -13,21 +13,20 @@ const checkFields = {};
 
 // regex zone
 const baseUrl = /^https|http:\/\//i;
-const imgExtension =  /(jpg|jpeg|png|bmp|gif|tif|tiff|SVG$)/ig;
+const imgExtension =  /jpg|jpeg|png|bmp|gif|tif|tiff|SVG$/i;
 
 checkFields.isLinkImg = (value, {req, location, path})=>{
     // const reg = new RegExp("this","gi");
     if (value == null || undefined){return true;}
-
-    return baseUrl.test(value) && imgExtension.test(value)
+    const base = baseUrl.test(value)
+    const extension = imgExtension.test(value)
+    console.log("la base: ", base);
+    console.log("la extension", extension)
+    return base && extension
 
 }
 checkFields.isLink = (value, {req, location, path})=> {
-    if (value == null || undefined){
-        value = null;
-        return true;
-    }
-    value = value.trim();
+    if (value == null || undefined){ return true;}
     return baseUrl.test(value) ;
 }
 checkFields.isIDSQL = (value,{req, location, path}) =>{

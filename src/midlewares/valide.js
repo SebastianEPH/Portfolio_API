@@ -14,8 +14,8 @@ function errorResponse(nameParams, dataParams){
     return {
         ok:false,
         errors: {
-            name:{
-                msg:"El parametro ["+nameParams+"] ID enviado no es válido",
+            [nameParams]:{
+                msg:"El parametro ["+nameParams+"] ID no es válido",
                 param:nameParams,
                 param_data: dataParams+ '',
                 location:"params"
