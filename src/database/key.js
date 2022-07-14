@@ -1,5 +1,4 @@
 const env = require("dotenv")
-
 env.config()
 module.exports = {
     database: {
@@ -9,3 +8,14 @@ module.exports = {
         database: process.env.DB_SQL_DATABASE
     }
 }
+/*        Example file .env
+
+PORT=5000
+VERSION_API=v2.0
+DB_SQL_USER=root
+DB_SQL_PASSWORD=87654321
+DB_SQL_HOST=localhost
+DB_SQL_DATABASE=portfolio_db
+DB_SQL_PORT=3306
+
+ */

@@ -1,7 +1,11 @@
 const pool = require("../../database/database");
 const responseMessage = require("../../helpers/responseMessage");
 const {check} = require("express-validator");
+const {checkParams} = require("../../midlewares/helpers");
 tools = {}
+
+tools.projects_id = checkParams("projects_id");
+tools.tools_id = checkParams("tools_id");
 
 tools.getAll = async(req, res)=>{
     const {projects_id} = req.params

@@ -1,10 +1,14 @@
 const pool = require("../../database/database");
 const responseMessage = require("../../helpers/responseMessage");
-const {trimBody} = require("../../helpers/helpers");
+const {trimBody, checkParams} = require("../../midlewares/helpers");
 const {check} = require("express-validator");
-const checkFields = require("../../midlewares/checkFields");
+const checkFields = require("../../helpers/checkFields");
 
 screenshot = {}
+
+screenshot.projects_id = checkParams("projects_id");
+screenshot.screenshots_id = checkParams("screenshots_id");
+
 screenshot.getAll= async(req, res)=>{
     const {projects_id} = req.params
     const response = await pool.query(`call sp_getProjects_screenshotsAll(?);`,[projects_id])

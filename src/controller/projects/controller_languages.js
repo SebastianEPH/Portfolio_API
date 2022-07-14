@@ -1,9 +1,13 @@
 const pool = require("../../database/database");
 const responseMessage = require("../../helpers/responseMessage");
 const {check} = require("express-validator");
-const checkFields = require("../../midlewares/checkFields");
+const {checkParams} = require("../../midlewares/helpers");
 
 language = {};
+
+language.projects_id = checkParams("projects_id");
+language.languages_id = checkParams("languages_id");
+
 language.getAll= async(req, res)=>{
     const {projects_id} = req.params
     const response = await pool.query(`call sp_getProjects_languagesAll(?);`,[projects_id])

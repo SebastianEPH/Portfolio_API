@@ -1,10 +1,14 @@
 const pool = require("../../database/database");
-const {trimBody} = require("../../helpers/helpers");
+const {trimBody,checkParams} = require("../../midlewares/helpers");
 const {check} = require("express-validator");
-const checkFields= require("../../midlewares/checkFields")
+const checkFields= require("../../helpers/checkFields")
 const responseMessage = require("../../helpers/responseMessage");
 
 feature = {};
+
+feature.projects_id = checkParams("projects_id");
+feature.features_id = checkParams("features_id");
+
 feature.getAll= async(req, res)=>{
     const {projects_id} = req.params
     const projectsFeatures = await pool.query(`call sp_getProjects_featuresAll(?);`,[projects_id])

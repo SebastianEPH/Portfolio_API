@@ -8,7 +8,6 @@ function isIDSQL(id){
     }
     return !isNaN(id)
 }
-
 const checkFields = {};
 
 // regex zone
