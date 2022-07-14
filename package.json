@@ -1,5 +1,5 @@
 {
-  "name": "porfolio",
+  "name": "portfolio_api",
   "version": "2.0.0",
   "description": "",
   "main": "index.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SebastianEPH/PortfolioApiRestBack"
+    "url": "git+https://github.com/SebastianEPH/Portfolio_API"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SebastianEPH/PortfolioApiRestBack/issues"
+    "url": "https://github.com/SebastianEPH/Portfolio_API/issues"
   },
-  "homepage": "https://github.com/SebastianEPH/PortfolioApiRestBack#readme",
+  "homepage": "https://github.com/SebastianEPH/Portfolio_API#readme",
   "dependencies": {
     "express": "^4.17.3",
     "cors": "^2.8.5",
