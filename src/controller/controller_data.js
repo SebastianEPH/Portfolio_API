@@ -16,7 +16,7 @@ data.getAll = async(req, res)=>{
     const extra_knowledge = await pool.query(`call sp_getMyExtraKnowledge();`);
     const programmingLanguages = await pool.query(`call sp_getMyProgrammingLanguages();`);
     const programmingTools = await pool.query(`call sp_getMyProgrammingTools();`);
-    const responseProjects = await pool.query("call sp_getProjectsAll();");
+    // const responseProjects = await pool.query("call sp_getProjectsAll();");
 
     let myInformation = information[0][0] ;
 
@@ -26,24 +26,24 @@ data.getAll = async(req, res)=>{
     myInformation.programming_languages = programmingLanguages[0];
     myInformation.programming_tools = programmingTools[0];
 
-    const projects = responseProjects[0]
-
-    for (let i = 0; i < projects.length; i++) {
-        const tools = await pool.query(`call sp_getProjects_toolsAll(${projects[i].id});`)
-        projects[i].tools = tools[0];
-
-        const languages = await pool.query(`call sp_getProjects_languagesAll(${projects[i].id});`)
-        projects[i].languages = languages[0];
-
-        const projects_features = await pool.query(`call sp_getProjects_featuresAll(${projects[i].id});`)
-        projects[i].features = projects_features[0];
-
-        const projects_screenshot= await pool.query(`call sp_getProjects_screenshotsAll(${projects[i].id});`)
-        projects[i].screenshots = projects_screenshot[0];
-
-    }
-
-    myInformation.projects = projects[0];
+    // const projects = responseProjects[0]
+    //
+    // for (let i = 0; i < projects.length; i++) {
+    //     const tools = await pool.query(`call sp_getProjects_toolsAll(${projects[i].id});`)
+    //     projects[i].tools = tools[0];
+    //
+    //     const languages = await pool.query(`call sp_getProjects_languagesAll(${projects[i].id});`)
+    //     projects[i].languages = languages[0];
+    //
+    //     const projects_features = await pool.query(`call sp_getProjects_featuresAll(${projects[i].id});`)
+    //     projects[i].features = projects_features[0];
+    //
+    //     const projects_screenshot= await pool.query(`call sp_getProjects_screenshotsAll(${projects[i].id});`)
+    //     projects[i].screenshots = projects_screenshot[0];
+    //
+    // }
+    //
+    // myInformation.projects = projects;
 
     res.status(200).json(myInformation);
 }
