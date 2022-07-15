@@ -6,11 +6,11 @@ const cors = require('cors')
 
 module.exports = (app) => {
     env.config()
-
+    app.use(cors());
     // settings
     app.set('port', process.env.PORT || 5000);
 
-    app.use(cors())
+
 
     app.use(morgan('dev'));
     app.use(express.urlencoded({
@@ -30,6 +30,6 @@ module.exports = (app) => {
     app.use(baseApi, require('../routes/projects/tools'));
 
     // Static files
-    app.use('/public', express.static(path.join(__dirname, '../public')));
+    // app.use('/public', express.static(path.join(__dirname, '../public')));
     return app;
 };

@@ -52,7 +52,14 @@ data.getSocialNetworks = async(req, res)=>{
     const socialNetworks = await pool.query(`call sp_getMySocialNetworks();`);
     res.json(socialNetworks[0]);
 }
-
+data.getEmails = async(req, res)=>{
+    const emails = await pool.query(`call sp_getMyInformation_emails();`);
+    res.json(emails[0]);
+}
+data.getPhones= async(req, res)=>{
+    const phones = await pool.query(`call sp_getMyInformation_emails();`);
+    res.json(phones[0]);
+}
 data.getLanguages = async(req, res)=>{
     const languages = await pool.query(`call sp_getMyLanguages();`);
     res.json(languages[0]);
