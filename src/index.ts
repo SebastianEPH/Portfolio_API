@@ -2,6 +2,7 @@ import express, {Application} from "express"
 import cors from "cors"
 import 'dotenv/config'
 import morgan from "morgan";
+import connection from "./database/Connection";
 
 class Server{
     public app:Application
@@ -15,6 +16,7 @@ class Server{
         }))
         this.config()
         this.routes()
+        connection()
     }
     config():void{
         this.app.set("port", process.env.SERVER_PORT)
