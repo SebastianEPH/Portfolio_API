@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb84f203-883c-43c3-9486-8b726ebd4efc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Routes/AuthRouter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Routes/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/User.Controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/database/Connection.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/helpers/Util.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/User.Model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/controller_data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/controller_data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/key.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/key.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,12 +29,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "D:\\SoftwareProjects\\NodeJs - Express\\Portfolio_API\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -44,10 +54,24 @@
       <workItem from="1657854235640" duration="1352000" />
       <workItem from="1657858278616" duration="114000" />
       <workItem from="1657858500882" duration="158000" />
+      <workItem from="1661879166928" duration="26000" />
+      <workItem from="1661879194062" duration="1112000" />
+      <workItem from="1661880615769" duration="2903000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
