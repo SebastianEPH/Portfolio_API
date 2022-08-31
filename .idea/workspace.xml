@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb84f203-883c-43c3-9486-8b726ebd4efc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/middleware/CheckFields.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/ResponseDB.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/Connection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/Connection.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/AuthRouter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/AuthRouter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/User.Controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/User.Controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/User.Model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/index.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +55,7 @@
       <workItem from="1657858500882" duration="158000" />
       <workItem from="1661879166928" duration="26000" />
       <workItem from="1661879194062" duration="1112000" />
-      <workItem from="1661880615769" duration="3276000" />
+      <workItem from="1661880615769" duration="10568000" />
     </task>
     <servers />
   </component>

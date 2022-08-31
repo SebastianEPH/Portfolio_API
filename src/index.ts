@@ -3,6 +3,7 @@ import cors from "cors"
 import 'dotenv/config'
 import morgan from "morgan";
 import connection from "./database/Connection";
+import {authRouter} from "./Routes";
 
 class Server{
     public app:Application
@@ -23,7 +24,8 @@ class Server{
         this.app.set("version", process.env.SERVER_VERSION)
     }
     routes():void{
-
+        const baseApi:string = `/api/${this.app.get("version")}`
+        this.app.use(baseApi, authRouter);
     }
     start():void{
         this.app.listen(this.app.get("port"), () =>{

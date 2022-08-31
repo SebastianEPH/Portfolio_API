@@ -1,20 +1,22 @@
 
-import {DocumentType, getModelForClass, prop, Ref,
-} from "@typegoose/typegoose";
+import {DocumentType, getModelForClass, prop, Ref} from "@typegoose/typegoose";
 // import bcrypt from "bcryptjs";
 // import { Role } from "./Role";
 
 export class User {
-    @prop({ required: true }) // mongoose
-    firstname: string; // ts
+    @prop({ required: false }) // mongoose
+    name: string; // ts
+
+    @prop({ required: false })
+    lastname: string;
 
     @prop({ required: true })
-    lastname: string;
+    username: string;
 
     @prop({ required: true })
     public password: string;
 
-    @prop()
+    @prop({ required: true })
     email: string;
 
     // @prop({ ref: () => Role })

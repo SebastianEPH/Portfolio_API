@@ -1,13 +1,16 @@
 import {Router} from "express";
+import {userController as user} from '../controllers'
 
-export class AuthRouter {
+class AuthRouter {
     public router:Router =  Router()
     constructor() {
         this.config()
     }
     config():void{
-        this.router.get('/auth/renew')
+        this.router.post('/users', user.addNew)
+        this.router.get('/users', user.getAll)
+        this.router.get('/users/:users_id', user.getOne)
     }
 }
 const authRouter = new AuthRouter()
-export default authRouter ;
+export default authRouter.router ;
