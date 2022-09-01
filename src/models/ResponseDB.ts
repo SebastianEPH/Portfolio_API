@@ -7,21 +7,21 @@ interface ResponseDbInterface{
     data?:any
 }
 export default class ResponseDB {
-    private message:string  = "";
+    private msg:string  = "";
     constructor(private response:ResponseDbInterface) {
         this.updateStatus();
     }
     private updateStatus():void{
-        if(this.response.status ==200) {this.message = "Operation was Successfully"; return;}
-        if(this.response.status ==400) {this.message = "Bad Request"; return;}
-        if(this.response.status ==404) {this.message = "Not Found Request"; return;}
-        if(this.response.status ==500) {this.message = "server internal Error"; return;}
+        if(this.response.status ==200) {this.msg = "Operation was Successfully"; return;}
+        if(this.response.status ==400) {this.msg = "Bad Request"; return;}
+        if(this.response.status ==404) {this.msg = "Not Found Request"; return;}
+        if(this.response.status ==500) {this.msg = "Internal Server Error"; return;}
     }
     send(){
         return{
             metadata:{
                 status:this.response.status,
-                message:this.message,
+                msg:this.msg,
                 errors:this.response.errors,
             },
             data:this.response.data

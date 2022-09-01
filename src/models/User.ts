@@ -3,7 +3,7 @@ import {DocumentType, getModelForClass, prop, Ref} from "@typegoose/typegoose";
 // import bcrypt from "bcryptjs";
 // import { Role } from "./Role";
 
-export class User {
+class User {
     @prop({ required: false }) // mongoose
     name: string; // ts
 
