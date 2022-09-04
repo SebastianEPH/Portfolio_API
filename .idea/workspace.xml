@@ -2,18 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb84f203-883c-43c3-9486-8b726ebd4efc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/middleware/CheckField.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/Auth.Router.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/Project.Controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/middleware/Middleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/Project.Model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/Project.Router.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Routes/AuthRouter.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/User.Controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/User.Controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/Connection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/Connection.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helpers/Util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/Util.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middleware/CheckFields.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middleware/CheckField.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware/CheckField.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/ResponseDB.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ResponseDB.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/Auth.Router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Auth.Router.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +35,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2BvJKZCK4wEvgMWXOtX2SXO02V6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -36,11 +45,18 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/SoftwareProjects/NodeJs - Express/Portfolio_API/src/controllers&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\SoftwareProjects\\NodeJs - Express\\Portfolio_API\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\SoftwareProjects\NodeJs - Express\Portfolio_API\src\controllers" />
+      <recent name="D:\SoftwareProjects\NodeJs - Express\Portfolio_API\src\routes" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -60,7 +76,11 @@
       <workItem from="1661879194062" duration="1112000" />
       <workItem from="1661880615769" duration="12827000" />
       <workItem from="1661914464827" duration="12369000" />
-      <workItem from="1661972317014" duration="10717000" />
+      <workItem from="1661972317014" duration="26675000" />
+      <workItem from="1662069954489" duration="836000" />
+      <workItem from="1662247750869" duration="16660000" />
+      <workItem from="1662277556647" duration="32000" />
+      <workItem from="1662314365771" duration="2812000" />
     </task>
     <servers />
   </component>

@@ -1,2 +1,3 @@
+import projectController from './Project.Controller'
 import userController from './User.Controller'
-export {userController}
+export {projectController,userController}

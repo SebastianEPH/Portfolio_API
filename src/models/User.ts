@@ -1,4 +1,3 @@
-
 import {DocumentType, getModelForClass, prop, Ref} from "@typegoose/typegoose";
 // import bcrypt from "bcryptjs";
 // import { Role } from "./Role";

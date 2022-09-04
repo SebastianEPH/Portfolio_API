@@ -1,10 +1,10 @@
 import {NextFunction, Request, Response} from 'express';
 import check from '../middleware/CheckField';
-import User from "../models/User";
+import Project from "../models/Project.Model";
 import ResponseDB from "../models/ResponseDB";
 
-class UserController {
-    private id:string = 'users_id';
+class ProjectController {
+    private id:string = 'projects_id';
     public queryGetAll = [
         check.offset,
         check.limit
@@ -13,9 +13,10 @@ class UserController {
     public async getAll(req: Request, res: Response) {
         try {
             const {offset, limit} = req.query
-            const data = await User.find()
+            const data = await Project.find()
                 .limit(Number(limit || 100))
                 .skip(Number(offset || 1))
+                .select("-__v");
 
             res.status(200).json( new ResponseDB({status: 200, data}).send())
         } catch (errors) {
@@ -25,7 +26,7 @@ class UserController {
 
     public async getOne(req: Request, res: Response) {
         try {
-            const data = await User.findById(req.params[this.id]);
+            const data = await Project.findById(req.params[this.id]);
             if (!data) return res.status(404).json(new ResponseDB({status: 404, data}).send())
 
             res.status(200).json(new ResponseDB({status: 200, data}).send())
@@ -41,23 +42,23 @@ class UserController {
     ]
 
     public async updateOne(req: Request, res: Response) {
+        const url = req.hostname + req.originalUrl
         try {
-            const data = await User.findOneAndUpdate(
+            const user = await Project.findOneAndUpdate(
                 {_id: req.params.users_id},
                 req.body, {
                     new: true,
                 });
-            if (!data) return res.status(404).json(new ResponseDB({status: 404, data}).send())
-            res.status(200).json(new ResponseDB({status: 200, data}).send())
+            if (!user) return res.status(404).json(new ResponseDB({status: 404, data: user}).send())
+            res.status(200).json(new ResponseDB({status: 200, data: user}).send())
         } catch (errors) {
             res.status(500).json(new ResponseDB({status: 500, errors, data: null}).send())
         }
-
     }
 
     public async remove(req: Request, res: Response) {
         try {
-            const data = await User.findByIdAndDelete(req.params.users_id)
+            const data = await Project.findByIdAndDelete(req.params.projects_id)
             if (!data) return res.status(404).json(new ResponseDB({status: 404, data}).send())
             res.status(200).json(new ResponseDB({status: 200, data}).send())
         } catch (errors) {
@@ -67,28 +68,28 @@ class UserController {
 
     public fieldsNew = [
         check.name.optional(),
-        check.lastname.optional(),
-        check.username.optional(),
-        check.email,
-        check.password,
+        check.url_deploy.optional(),
+        check.url_repository.optional(),
+        check.url_documentation.optional(),
+        check.description.optional(),
+        check.description_short.optional(),
+        check.note.optional(),
+        check.date_start.optional(),
+        check.date_finish.optional(),
+        check.url_img.optional(),
+        check.current_version.optional(),
+        check.architecture.optional(),
+        check.current_state.optional(),
+        check.size.optional(),
+        check.platform.optional(),
+        check.licence.optional(),
+        check.software_editor.optional()
     ]
 
     public async addNew(req: Request, res: Response, next: NextFunction) {
         try {
-            const {name, lastname, email, password} = req.body
-            const user_ = await User.findOne({email})
-            if (user_) {
-                return res.status(400).json(new ResponseDB({
-                    status: 400,
-                    errors: {msg: 'El Email ya existe'},
-                    data: null
-                }).send())
-            }
-            const username = 'user_' + email.split('@', 1)[0]
-            const user = new User({
-                name, lastname, username, email, password
-            })
-            await user.save({});
+            const user = new Project(req.body)
+            await user.save();
             res.status(200).json(new ResponseDB({status: 200, data: user}).send())
         } catch (errors) {
             res.status(500).json(new ResponseDB({status: 500, errors, data: null}).send())
@@ -96,5 +97,5 @@ class UserController {
     }
 }
 
-const userController = new UserController();
-export default userController;
+const projectController = new ProjectController();
+export default projectController;

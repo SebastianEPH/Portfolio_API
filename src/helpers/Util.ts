@@ -1,3 +1,4 @@
+
 export default class Util {
     static x():void{
 
@@ -23,8 +24,11 @@ export default class Util {
         if(num>=1 && num <=100)
             return true;
         throw new Error('solo está permitido un máximo de 100');
-
     }
 
+    static isDate(date:string){
+        const dateWrapper = new Date(date);
+        return !isNaN(dateWrapper.getDate());
+    }
 
 }

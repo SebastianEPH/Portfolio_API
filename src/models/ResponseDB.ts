@@ -1,6 +1,3 @@
-// interface Errors{
-//     message:string
-// }
 interface ResponseDbInterface{
     status:number,
     errors?:any,
