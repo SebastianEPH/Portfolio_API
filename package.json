@@ -1,34 +1,80 @@
 {
-  "name": "portfolio_api",
-  "version": "2.0.0",
-  "description": "",
+  "name": "personal-api",
+  "version": "1.0.0",
+  "description": "personal api",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon npm src/index.js",
-    "start": "node src/index.js"
+    "local": "cross-env NODE_ENV=dev serverless offline",
+    "deploy-dev": "serverless deploy",
+    "test": "cross-env NODE_ENV=dev mocha -r ts-node/register tests/*.test.ts --exit",
+    "lint-and-fix": "eslint . --ext .ts --fix",
+    "lint": "eslint . --ext .ts",
+    "coverage": "nyc --reporter lcov npm run test"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "dependencies": {
+    "@aws-sdk/client-sqs": "^3.212.0",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1131.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.8.0",
+    "reflect-metadata": "^0.1.13",
+    "serverless-offline-sqs": "^7.3.1",
+    "serverless-webpack": "^5.11.0",
+    "typedi": "^0.10.0"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-sqs": "^3.212.0",
+    "@motymichaely/serverless-openapi-documentation": "^0.5.3",
+    "@types/aws-lambda": "^8.10.51",
+    "@types/chai": "^4.2.11",
+    "@types/dotenv-safe": "^8.1.0",
+    "@types/lambda-tester": "^3.6.0",
+    "@types/mocha": "^7.0.2",
+    "@types/mongoose": "^5.7.14",
+    "@types/sinon": "^9.0.0",
+    "@types/supertest": "^2.0.8",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
+    "chai": "^4.2.0",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "istanbul": "^0.4.5",
+    "lambda-tester": "^4.0.1",
+    "mocha": "^9.1.3",
+    "nyc": "^15.0.1",
+    "prettier": "^2.7.1",
+    "serverless-dotenv-plugin": "^3.12.2",
+    "serverless-offline": "^11.5.0",
+    "serverless-plugin-optimize": "^4.2.1-rc.1",
+    "serverless-plugin-typescript": "^2.1.0",
+    "sinon": "^9.0.2",
+    "ts-node": "^8.9.1",
+    "tslint": "^6.1.3",
+    "typescript": "^4.9.3"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SebastianEPH/Portfolio_API"
+    "url": "git+https://github.com/SebastianEPH/Portfolio_API.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Nodejs",
+    "TypeScript",
+    "ServerLess",
+    "MongoDB Atlas",
+    "AWS Lambda"
+  ],
+  "author": "May",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/SebastianEPH/Portfolio_API/issues"
   },
-  "homepage": "https://github.com/SebastianEPH/Portfolio_API#readme",
-  "dependencies": {
-    "express": "^4.17.3",
-    "cors": "^2.8.5",
-    "express-validator": "^6.14.0",
-    "helmet": "^5.0.2",
-    "mysql": "^2.18.1",
-    "dotenv": "^16.0.0",
-    "morgan": "^1.10.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
-  }
+  "homepage": "https://github.com/SebastianEPH/Portfolio_API#readme"
 }

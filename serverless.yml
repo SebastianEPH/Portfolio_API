@@ -1,0 +1,64 @@
+service: PersonalAPIPersonalProjects
+variablesResolutionMode: null
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage,'dev'}
+  region: ${opt:region,'sa-east-1'}
+  stackName: ApiCV-${self:provider.stage}
+  deploymentPrefix: projects_personal
+  httpApi:
+    cors: true
+    disableDefaultEndpoint: false
+    metrics: true
+    useProviderTags: true
+  tags:
+    Project: PortfolioAPI
+    Environment: ${opt:stage,'dev'}
+  logs:
+    httpApi: true
+    frameworkLambda: true
+  environment:
+    REGION: ${self:provider.region}
+    NODE_ENV: dev
+
+
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline-sqs
+  - serverless-offline
+  - serverless-plugin-optimize
+  - serverless-dotenv-plugin
+
+package:
+  individually: true
+  include:
+    - config/.env.${self:provider.stage}
+
+functions:
+  projects-get-all:
+    handler: app/handler.getAll
+    events:
+      - httpApi:
+          path: /api/v3/my/project
+          method: get
+
+  project-create:
+    handler: app/handler.create
+    events:
+      - httpApi:
+          path: /api/v3/my/project
+          method: post
+
+custom:
+  serverless-offline:
+    httpPort: 5000
+    lambdaPort: 5004
+  dotenv:
+    path: config/.env.${self:provider.stage}
+
+
+
+

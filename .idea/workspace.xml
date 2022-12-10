@@ -1,11 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bb84f203-883c-43c3-9486-8b726ebd4efc" name="Changes" comment="">
+    <list default="true" id="4a4841c9-cc50-41d5-867e-b9675308df85" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/constant/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controller/projectController.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/handler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/project.interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/model/dto/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/model/dto/projectCreateDTO.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/model/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/model/mongoose.connection.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/model/project.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/service/project.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/utils/constants.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/utils/message.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/utils/sleep.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/.env.dev.example" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/serverless.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.build.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tslint.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/[GitHub] Portfolio.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/controller_data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/controller_data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/key.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/key.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/portfolio-without-data.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/controller_data.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/controller_project.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/projects/controller_features.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/projects/controller_languages.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/projects/controller_screnshots.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/projects/controller_tools.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/database.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/key.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/checkFields.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/responseMessage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/midlewares/helpers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/data.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/projects/features.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/projects/languages.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/projects/projects.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/projects/screenshots.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/projects/tools.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/start.bat" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,36 +65,51 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2BvJKZCK4wEvgMWXOtX2SXO02V6" />
+  <component name="ProjectId" id="2IhysRwYx3ZVz0uQ8FK95h58Hz1" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/SoftwareProjects/NodeJs - Serverless/Portfolio_API",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "D:\\SoftwareProjects\\NodeJs - Serverless\\Portfolio_API\\node_modules\\prettier",
+    "ts.external.directory.path": "D:\\SoftwareProjects\\NodeJs - Serverless\\Portfolio_API\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="bb84f203-883c-43c3-9486-8b726ebd4efc" name="Changes" comment="" />
-      <created>1657780561937</created>
+      <changelist id="4a4841c9-cc50-41d5-867e-b9675308df85" name="Changes" comment="" />
+      <created>1670648315255</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1657780561937</updated>
-      <workItem from="1657780563127" duration="668000" />
-      <workItem from="1657844798263" duration="2029000" />
-      <workItem from="1657847102589" duration="1484000" />
-      <workItem from="1657851437564" duration="567000" />
-      <workItem from="1657854235640" duration="1352000" />
-      <workItem from="1657858278616" duration="114000" />
-      <workItem from="1657858500882" duration="158000" />
+      <updated>1670648315255</updated>
+      <workItem from="1670648316354" duration="196000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
