@@ -1,5 +1,5 @@
 import {IProject} from '../interfaces';
-import {projectInstance as mongoose} from './mongoose.connection';
+import {projectInstance as mongoose} from '../database/mongoose.connection';
 
 
 const MODEL_NAME = 'project';

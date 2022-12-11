@@ -1,8 +1,8 @@
 import {
     IsArray,
-    IsDate, IsDateString,
+    IsDate, IsDateString, IsIn,
     IsOptional,
-    IsString, MinLength,
+    IsString, IsUrl, MinLength,
 } from 'class-validator';
 import {Service} from 'typedi';
 import {IProject} from '../../interfaces';
@@ -18,6 +18,7 @@ export class ProjectCreateDTO implements IProject {
     public readonly type: string;
 
     @IsString()
+    @IsIn(['practica', 'básico', 'intermedio', 'avanzado'])
     @IsOptional()
     public readonly difficulty_level: string;
 
@@ -33,19 +34,19 @@ export class ProjectCreateDTO implements IProject {
     @IsOptional()
     public readonly note: string;
 
-    @IsString()
+    @IsUrl()
     @IsOptional()
     public readonly url_repository: string;
 
-    @IsString()
+    @IsUrl()
     @IsOptional()
     public readonly url_documentation: string;
 
-    @IsString()
+    @IsUrl()
     @IsOptional()
     public readonly url_img: string;
 
-    @IsString()
+    @IsUrl()
     @IsOptional()
     public readonly url_web_deploy: string;
 

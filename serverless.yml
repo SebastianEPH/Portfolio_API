@@ -1,4 +1,4 @@
-service: PersonalAPIPersonalProjects
+service: PersonalAPIPersonal
 variablesResolutionMode: null
 
 provider:
@@ -7,7 +7,7 @@ provider:
   stage: ${opt:stage,'dev'}
   region: ${opt:region,'sa-east-1'}
   stackName: ApiCV-${self:provider.stage}
-  deploymentPrefix: projects_personal
+  deploymentPrefix: projects
   httpApi:
     cors: true
     disableDefaultEndpoint: false

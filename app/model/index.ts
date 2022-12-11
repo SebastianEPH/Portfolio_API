@@ -1,1 +1,1 @@
-export * from './mongoose.connection';
+export * from '../database/mongoose.connection';
