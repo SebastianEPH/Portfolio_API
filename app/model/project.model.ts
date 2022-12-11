@@ -7,27 +7,27 @@ const MODEL_NAME = 'project';
 const project = new mongoose.Schema({
     name: String,
     type: String, // is other  collection | Android | desktop |
-    // difficulty_level: String,
+    difficulty_level: String,
     // features:[String], //  is object
     // languages: [String], // is reference object
     // frameworks: [String], // is object
     // libraries: [String],  //  is object
     // images: [String], // is object images | link_img
-    // short_description: String,
+    short_description: String,
     description: String,
     note: String,
-    // url_repository: String,
-    // url_documentation: String,
-    // url_img: String,
-    // url_web_deploy: String,
-    // date_init: String,
-    // date_finish: String,
+    url_repository: String,
+    url_documentation: String,
+    url_img: String,
+    url_web_deploy: String,
+    date_init: String,
+    date_finish: String,
     current_version: String,
-    // architecture_support: String,
-    // state: String,// terminate
-    // size: String, // 50MB
+    architecture_support: [String],
+    state: String,// terminate
+    size: String, // 50MB
     // platform:[String], // puede ser otra colección
-    // licence: String, // mit
+    licence: String, // mit
     // dev_tools: [String],
 
     create_at: {type: Date, default: Date.now},

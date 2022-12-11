@@ -49,12 +49,14 @@ export class MessageUtil {
 
 export const parseValidationErrors = (errors: ValidationError[]): string => {
     const errorMessages = errors.reduce((acc, element) => {
+        console.log('errors; ',errors)
         const property = Object.values(element.constraints).reduce(
             (_, valueproperty) => {
                 return valueproperty;
             },
             ''
         );
+        console.log('acc, ', acc,' property: ', property)
         return `${acc} ${acc ? '-- ' : ''}${property}`;
     }, '');
     return `${errorMessages}`;

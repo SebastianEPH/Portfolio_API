@@ -8,7 +8,7 @@ mongoose.Promise = global.Promise;
 let isAuthConnected;
 
 export const projectInstance = new mongoose.Mongoose();
-const projectProperties = {
+const mongoProperties = {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     dbName: DATABASE_NAME,
@@ -24,7 +24,7 @@ export const connectToProjectDatabase = () => {
         return Promise.resolve();
     }
     console.log('=> using new auth database connection', DB_URL);
-    return projectInstance.connect(DB_URL, projectProperties).then((db) => {
+    return projectInstance.connect(DB_URL, mongoProperties).then((db) => {
         isAuthConnected = db.connections[0].readyState;
         console.log('runing databse')
     }).catch((err) => {
