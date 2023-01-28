@@ -1,6 +1,6 @@
 import {IFeatures} from './index'
 
-export interface IProject {
+export interface ProjectI {
     name: string;
     type?: string; // is other  collection | Android | desktop |
     difficulty_level?: string;
@@ -20,7 +20,7 @@ export interface IProject {
     date_finish?: Date;
     current_version?: string;
     architecture_support?: [string];
-    state?: string;// terminate
+    dev_state?: string;// terminate
     size?: string; // 50MB
     platform?: [string]; // puede ser otra colección
     licence?: string; // mit

@@ -259,3 +259,4 @@ dist
 /swagger/swagger.json
 /config/.env.dev
 /config/.env.pro
+/.build/

@@ -39,14 +39,14 @@ package:
 
 functions:
   projects-get-all:
-    handler: app/handler.getAll
+    handler: src/handler.getAll
     events:
       - httpApi:
           path: /api/v3/my/project
           method: get
 
   project-create:
-    handler: app/handler.create
+    handler: src/handler.create
     events:
       - httpApi:
           path: /api/v3/my/project
