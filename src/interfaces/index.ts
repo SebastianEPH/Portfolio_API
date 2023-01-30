@@ -1,8 +1,7 @@
-import {IFeatures} from './feature.interface';
-import {IProgrammingLanguage} from './programmingLanguage.interface';
 import {ProjectI} from './project.interface';
+import {ToolInterface} from './tool.interface';
 
 
 export {
-    ProjectI, IFeatures, IProgrammingLanguage
+    ProjectI, ToolInterface
 };

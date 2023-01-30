@@ -39,17 +39,59 @@ package:
 
 functions:
   projects-get-all:
-    handler: src/handler.getAll
+    handler: src/handler.projectGetAll
     events:
       - httpApi:
           path: /api/v3/my/project
           method: get
 
   project-create:
-    handler: src/handler.create
+    handler: src/handler.projectCreate
     events:
       - httpApi:
           path: /api/v3/my/project
+          method: post
+
+  programmingLanguage-get-all:
+    handler: src/handler.programmingLanguageGetAll
+    events:
+      - httpApi:
+          path: /api/v3/my/programming-language
+          method: get
+
+  programmingLanguage-create:
+    handler: src/handler.programmingLanguageCreate
+    events:
+      - httpApi:
+          path: /api/v3/my/programming-language
+          method: post
+
+  framework-get-all:
+    handler: src/handler.frameworkGetAll
+    events:
+      - httpApi:
+          path: /api/v3/my/framework
+          method: get
+
+  framework-create:
+    handler: src/handler.frameworkCreate
+    events:
+      - httpApi:
+          path: /api/v3/my/framework
+          method: post
+
+  library-get-all:
+    handler: src/handler.librariesGetAll
+    events:
+      - httpApi:
+          path: /api/v3/my/libraries
+          method: get
+
+  library-create:
+    handler: src/handler.librariesCreate
+    events:
+      - httpApi:
+          path: /api/v3/my/libraries
           method: post
 
 custom:

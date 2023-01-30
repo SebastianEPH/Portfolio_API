@@ -46,8 +46,6 @@ export class ProjectController {
             const response = await this.projectService.create(project);
             // return MessageUtil.success(response);
 
-            console.log('esto es el error')
-
 
             return JSON.stringify({
                 statusCode: 200,

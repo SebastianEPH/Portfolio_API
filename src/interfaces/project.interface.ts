@@ -1,13 +1,14 @@
-import {IFeatures} from './index'
+import {Document} from 'mongoose';
+import {ToolInterface} from './index'
 
-export interface ProjectI {
+export interface ProjectI extends Document {
     name: string;
     type?: string; // is other  collection | Android | desktop |
     difficulty_level?: string;
-    features?: [IFeatures]; //  is object
-    languages?: [string]; // is reference object
-    frameworks?: [string]; // is object
-    libraries?: [string];  //  is object
+    features?: any; //  is object
+    programming_languages?: [ToolInterface['_id']];
+    frameworks?: [ToolInterface['_id']];
+    libraries?: [ToolInterface['_id']];
     images?: [string]; // is object images | link_img
     short_description?: string;
     description?: string;

@@ -5,13 +5,13 @@ import {MessageUtil} from '../utils/message';
 
 @Service()
 export class ProjectService {
-    async create(projectCreate){
+    async create(projectCreate) {
         try {
             // await connectDatabase();
             // console.log('project --- : ',projectCreate)
             const project = await projectModel.create(projectCreate);
-            const result = await project.save();
-            console.log(result);
+            await project.save();
+            console.log(project);
             return project
         } catch (error) {
             console.error('Error => ', error);
@@ -23,7 +23,20 @@ export class ProjectService {
         try {
             // return await ProjectModel.findAll();
             await connectDatabase();
-            return await projectModel.find();
+            return await projectModel.find()
+                .populate([
+                    {
+                        path: 'programming_languages',
+                        select: '-_id -__v'
+                    }, {
+                        path: 'frameworks',
+                        select: '-_id -__v'
+                    }, {
+                        path: 'libraries',
+                        select: '-_id -__v'
+                    }]
+                )
+                .exec()
         } catch (error) {
             console.error(error);
             throw error;

@@ -1,8 +1,10 @@
 import mongoose from 'mongoose';
+import tools from './tools.model';
 
+const {programmingLanguagesModel, frameworksModel, librariesModel} = tools
 const MODEL_NAME = 'project';
 
-const ProjectSchema = new mongoose.Schema({
+const projectSchema = new mongoose.Schema({
     // phone: {
     //     type: String,
     //     validate: {
@@ -34,25 +36,33 @@ const ProjectSchema = new mongoose.Schema({
         trim: true
     },
     features: {
-        type: String, // IFeatures
-        required: false,
-        trim: true
-    },
-    languages: {
         type: String,
-        required: false,
-        trim: true
+        required: false
     },
-    frameworks: {
-        type: [String],
-        required: false,
-        trim: true
-    },
-    libraries: {
-        type: [String],
-        required: false,
-        trim: true
-    },
+    programming_languages: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: programmingLanguagesModel,
+            required: false,
+            trim: true
+        }
+    ],
+    frameworks: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: frameworksModel,
+            required: false,
+            trim: true
+        }
+    ],
+    libraries: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: librariesModel,
+            required: false,
+            trim: true
+        }
+    ],
     images: {
         type: [String],
         required: false,
@@ -138,14 +148,13 @@ const ProjectSchema = new mongoose.Schema({
         required: false,
         trim: true
     },
-    created_at:{
+    created_at: {
         type: Date,
         default: Date.now
     },
-    updated_at:{
+    updated_at: {
         type: Date,
         default: Date.now
     }
 });
-
-export default mongoose.model(MODEL_NAME, ProjectSchema);
+export default mongoose.model(MODEL_NAME, projectSchema);
