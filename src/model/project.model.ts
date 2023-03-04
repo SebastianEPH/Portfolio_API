@@ -35,10 +35,18 @@ const projectSchema = new mongoose.Schema({
         required: false,
         trim: true
     },
-    features: {
-        type: String,
-        required: false
-    },
+    // features:[
+    //     {
+    //         images: {
+    //             type: mongoose.Types.DocumentArray,
+    //             required: false
+    //         },
+    //         url_link:{
+    //             type: mongoose.Types.DocumentArray,
+    //             required: false
+    //         }
+    //     }
+    // ],
     programming_languages: [
         {
             type: mongoose.Types.ObjectId,

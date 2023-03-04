@@ -1,7 +1,8 @@
-import {ProjectI} from './project.interface';
+import {ProjectInterface} from './project.interface';
+import {ResponseServiceInterface} from './service.Interface'
 import {ToolInterface} from './tool.interface';
 
 
 export {
-    ProjectI, ToolInterface
+    ProjectInterface, ToolInterface, ResponseServiceInterface
 };

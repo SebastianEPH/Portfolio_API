@@ -1,13 +1,14 @@
 import {APIGatewayEvent} from 'aws-lambda';
 import {Service} from 'typedi';
-import {ProjectI} from '../interfaces';
+import {ProjectInterface} from '../interfaces';
 import {ProjectService} from '../service/project.service';
 import {MessageUtil} from '../utils/message';
 
 @Service()
 export class ProjectController {
 
-    constructor(private projectService: ProjectService) {}
+    constructor(private projectService: ProjectService) {
+    }
 
     async getAll(event: APIGatewayEvent): Promise<MessageUtil> {
         // const {} = event.queryStringParameters;
@@ -35,7 +36,7 @@ export class ProjectController {
 
     async create(event: APIGatewayEvent) {
 
-        const project: ProjectI = JSON.parse(event.body);
+        const project: ProjectInterface = JSON.parse(event.body);
         try {
             // const projectCreateDto = new ProjectCreateDTO(project);
             // const dtoValidation = await validate(projectCreateDto);
@@ -49,7 +50,7 @@ export class ProjectController {
 
             return JSON.stringify({
                 statusCode: 200,
-                message: "Card Credit was added successfully",
+                message: 'Card Credit was added successfully',
                 body: response,
             });
 

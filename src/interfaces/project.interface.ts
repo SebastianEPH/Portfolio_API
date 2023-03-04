@@ -1,7 +1,8 @@
 import {Document} from 'mongoose';
 import {ToolInterface} from './index'
 
-export interface ProjectI extends Document {
+export interface ProjectInterface extends Document {
+    _id?: string;
     name: string;
     type?: string; // is other  collection | Android | desktop |
     difficulty_level?: string;
@@ -26,4 +27,8 @@ export interface ProjectI extends Document {
     platform?: [string]; // puede ser otra colección
     licence?: string; // mit
     dev_tools?: [string];
+    __v?: string;
+}
+export interface ProjectFiltersInterface extends Document {
+    name: string;
 }

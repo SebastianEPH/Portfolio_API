@@ -23,7 +23,7 @@ const toolsModel = new mongoose.Schema({
     }
 });
 export default {
-    programmingLanguagesModel: mongoose.model('programmingLanguage', toolsModel),
+    programmingLanguagesModel: mongoose.model('programming_languages', toolsModel),
     frameworksModel: mongoose.model('frameworks', toolsModel),
     librariesModel: mongoose.model('libraries', toolsModel)
 }

@@ -28,7 +28,8 @@
     "reflect-metadata": "^0.1.13",
     "serverless-offline-sqs": "^7.3.1",
     "serverless-webpack": "^5.11.0",
-    "typedi": "^0.10.0"
+    "typedi": "^0.10.0",
+    "validator": "^13.9.0"
   },
   "devDependencies": {
     "@aws-sdk/client-sqs": "^3.212.0",

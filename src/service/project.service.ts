@@ -1,5 +1,4 @@
 import {Service} from 'typedi';
-import {connectDatabase} from '../database/conecction_';
 import projectModel from '../model/project.model';
 import {MessageUtil} from '../utils/message';
 
@@ -22,7 +21,6 @@ export class ProjectService {
     async getAll(): Promise<MessageUtil> {
         try {
             // return await ProjectModel.findAll();
-            await connectDatabase();
             return await projectModel.find()
                 .populate([
                     {

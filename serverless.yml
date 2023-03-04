@@ -39,32 +39,38 @@ package:
 
 functions:
   projects-get-all:
-    handler: src/handler.projectGetAll
+    handler: src/handler.getAllProject
     events:
       - httpApi:
           path: /api/v3/my/project
           method: get
 
   project-create:
-    handler: src/handler.projectCreate
+    handler: src/handler.addProject
     events:
       - httpApi:
           path: /api/v3/my/project
           method: post
 
-  programmingLanguage-get-all:
-    handler: src/handler.programmingLanguageGetAll
+  AddProgrammingLanguages:
+    handler: src/handler.addProgrammingLanguages
     events:
       - httpApi:
-          path: /api/v3/my/programming-language
-          method: get
-
-  programmingLanguage-create:
-    handler: src/handler.programmingLanguageCreate
-    events:
-      - httpApi:
-          path: /api/v3/my/programming-language
+          path: /api/v3/my/programming_languages
           method: post
+
+  GetAllProgrammingLanguage:
+    handler: src/handler.getAllProgrammingLanguages
+    events:
+      - httpApi:
+          path: /api/v3/my/programming_languages
+          method: get
+  GetProgrammingLanguage:
+    handler: src/handler.getProgrammingLanguages
+    events:
+      - httpApi:
+          path: /api/v3/my/programming_languages/{id}
+          method: get
 
   framework-get-all:
     handler: src/handler.frameworkGetAll

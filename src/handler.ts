@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import 'reflect-metadata';
 import Container from 'typedi';
-import {ProgrammingController, ProjectController, LibrariesController, FrameworksController} from './controller';
+import {ProgrammingLanguageController, ProjectController, LibrariesController, FrameworksController} from './controller';
 import {connectDatabase} from './database/conecction_';
 // import {connectToProjectDatabase} from './model';
 
@@ -17,42 +17,48 @@ dotenv.config({
 });
 
 const projectController = Container.get(ProjectController);
-const programmingLanguage = Container.get(ProgrammingController);
+const programmingLanguage = Container.get(ProgrammingLanguageController);
 const librariesController = Container.get(LibrariesController)
 const framwworkController = Container.get(FrameworksController)
 
 
-export const projectGetAll: Handler = async (event: APIGatewayEvent, context: Context) => {
+export const getAllProject: Handler = async (event: APIGatewayEvent, context: Context) => {
     context.callbackWaitsForEmptyEventLoop = false;
-    // await connectToProjectDatabase();
     await connectDatabase();
     return projectController.getAll(event);
 };
 
-export const projectCreate: Handler = async (event: APIGatewayEvent, context: Context) => {
+export const addProject: Handler = async (event: APIGatewayEvent, context: Context) => {
     context.callbackWaitsForEmptyEventLoop = false;
-    // await connectToProjectDatabase();
     await connectDatabase();
     return projectController.create(event);
 };
 
-export const programmingLanguageCreate: Handler = async (event: APIGatewayEvent, context: Context) => {
+export const addProgrammingLanguages: Handler = async (event: APIGatewayEvent, context: Context) => {
     context.callbackWaitsForEmptyEventLoop = false;
-    console.log('event: ', event)
     await connectDatabase();
     return programmingLanguage.create(event);
+};
+export const getAllProgrammingLanguages: Handler = async (event: APIGatewayEvent, context: Context) => {
+    context.callbackWaitsForEmptyEventLoop = false;
+    await connectDatabase();
+    return programmingLanguage.getAllFilters(event);
+};
+export const getProgrammingLanguages: Handler = async (event: APIGatewayEvent, context: Context) => {
+    context.callbackWaitsForEmptyEventLoop = false;
+    await connectDatabase();
+    return programmingLanguage.getById(event);
 };
 
 export const frameworkCreate: Handler = async (event: APIGatewayEvent, context: Context) => {
     context.callbackWaitsForEmptyEventLoop = false;
-    console.log('event: ', event)
     await connectDatabase();
     return framwworkController.create(event);
 };
 
 export const librariesCreate: Handler = async (event: APIGatewayEvent, context: Context) => {
     context.callbackWaitsForEmptyEventLoop = false;
-    console.log('event: ', event)
+
     await connectDatabase();
     return librariesController.create(event);
 };

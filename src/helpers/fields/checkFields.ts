@@ -4,10 +4,11 @@ import {check, param} from "express-validator";
 const trimBody= async (req:Request, res:Response,next:NextFunction)=>{
     for (let key in (req.body)) {
         // if (typeof (req.body[key]+"") !== 'undefined' || req.body[key] !== undefined|| req.body[key] !== null){}
-        req.body[key] = (req.body[key]+"").trim();
+        req.body[key] = (req.body[key]+'').trim();
     }
     next();
 }
+// const isMongoId = ()
 const checkParams = (nameParams:string)=>
     param(nameParams).not()
         .isEmpty()

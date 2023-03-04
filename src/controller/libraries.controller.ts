@@ -21,4 +21,7 @@ export class LibrariesController {
 
         }
     }
+    async get(event:APIGatewayEvent){
+        return '';
+    }
 }
